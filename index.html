@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeh Dadina — Portfolio</title>
+  <meta name="description"
+    content="Portfolio of Jeh Dadina — Fintech builder, AI systems thinker, frontend engineer at KJSSE." />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ═══ STICKY FLOATING NAVBAR (Feature 10) ═══ -->
+  <nav id="top-nav">
+    <div class="nav-brand">JD</div>
+    <div class="nav-section-name" id="nav-section-name">Home</div>
+    <div class="nav-links-bar">
+      <a onclick="goTo(0)">Home</a>
+      <a onclick="goTo(1)">Experience</a>
+      <a onclick="goTo(2)">Skills</a>
+      <a onclick="goTo(3)">Projects</a>
+      <a onclick="goTo(4)">Contact</a>
+    </div>
+    <!-- Hamburger Icon for Mobile -->
+    <div class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE OVERLAY MENU -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+    <div class="mobile-menu-links">
+      <a onclick="closeMobileMenu(); goTo(0)">Home</a>
+      <a onclick="closeMobileMenu(); goTo(1)">Experience</a>
+      <a onclick="closeMobileMenu(); goTo(2)">Skills</a>
+      <a onclick="closeMobileMenu(); goTo(3)">Projects</a>
+      <a onclick="closeMobileMenu(); goTo(4)">Contact</a>
+    </div>
+  </div>
+
+  <!-- NAV DOTS -->
+  <div id="nav-dots">
+    <div class="dot active" data-page="1" onclick="goTo(0)"></div>
+    <div class="dot" data-page="2" onclick="goTo(1)"></div>
+    <div class="dot" data-page="3" onclick="goTo(2)"></div>
+    <div class="dot" data-page="4" onclick="goTo(3)"></div>
+    <div class="dot" data-page="5" onclick="goTo(4)"></div>
+  </div>
+
+  <!-- UP/DOWN NAVIGATION -->
+  <div class="nav-controls">
+    <button id="nav-up" title="Previous Page" onclick="goUp()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6" /></svg>
+    </button>
+    <button id="nav-down" title="Next Page" onclick="goDown()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6" /></svg>
+    </button>
+  </div>
+
+  <!-- ══ PAGE 1 — HERO ══ -->
+  <section class="section" id="page1">
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-layout">
+      <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:1.5rem;">
+        <div class="card-glow"></div>
+        <figure class="tilted-card-figure fade-up d1" id="tilted-card">
+          <div class="tilted-card-inner">
+            <img class="tilted-card-img" src="jehface.png" />
+          </div>
+          <figcaption class="tilted-card-caption">Jeh Dadina</figcaption>
+        </figure>
+
+      </div>
+
+      <div class="hero-right">
+        <!-- Feature 1: BlurText hero name -->
+        <h1 class="hero-name fade-up d2" id="hero-name-el">
+          <span class="blur-line" data-text="Jeh"></span><br />
+          <span class="blur-line gradient" data-text="Dadina"></span>
+        </h1>
+        <!-- Feature 4: Typewriter subtitle -->
+        <p class="hero-sub fade-up d3" id="typewriter-el"></p>
+
+        <!-- Social SVGs -->
+        <div class="hero-socials fade-up d4" style="display:flex; gap:0.9rem; flex-wrap:wrap;">
+          <a class="hero-social-link" href="https://github.com/jehdadina-jpg" target="_blank" title="GitHub"
+            aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+            </svg>
+          </a>
+          <a class="hero-social-link" href="https://www.codechef.com/users/jehdadina/" target="_blank" title="CodeChef"
+            aria-label="CodeChef">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon
+                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+            </svg>
+          </a>
+          <a class="hero-social-link" href="https://www.linkedin.com/in/jehdadina/" target="_blank" title="LinkedIn"
+            aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+          <a class="hero-social-link" href="https://www.instagram.com/jehdadina/" target="_blank" title="Instagram"
+            aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a class="hero-social-link" href="mailto:jehdadina@gmail.com" title="Email" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="mouse-icon"></div>
+    </div>
+  </section>
+
+  <!-- ══ PAGE 2 — EXPERIENCE (Feature 6: Timeline) ══ -->
+  <section class="section" id="page2">
+    <canvas id="galaxy-canvas"></canvas>
+    <div class="timeline-content">
+      <div class="section-title" data-scramble="Experience & Education">Experience & Education</div>
+
+      <div class="timeline">
+        <div class="timeline-line"></div>
+
+        <div class="tl-item tl-left">
+          <div class="tl-dot"></div>
+          <div class="glow-card tl-card">
+            <div class="card-org">Finance & Technology Club · KJSSE</div>
+            <div class="card-role">Founder / FinTech Head</div>
+            <div class="card-dur">Jan 2025 – Present</div>
+            <ul class="card-body">
+              <li>Organized FinovateX 2026 — A 7-hour dual event consisting of AlgoTrading and Fraud Detection</li>
+              <li>Authored fintech & finance research papers and book chapters</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item tl-right">
+          <div class="tl-dot"></div>
+          <div class="glow-card tl-card">
+            <div class="card-org">Rayze Technologies</div>
+            <div class="card-role">Intern — Founders Office</div>
+            <div class="card-dur">Mar 2025 – Present</div>
+            <ul class="card-body">
+              <li>Supporting founders on Route5 — AI execution control plane</li>
+              <li>Contributing to product roadmap for mid-tier financial institutions</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item tl-left">
+          <div class="tl-dot"></div>
+          <div class="glow-card tl-card">
+            <div class="card-org">TÜV Rheinland India</div>
+            <div class="card-role">Intern — Industrial Services & Cyber Security</div>
+            <div class="card-dur">Aug – Dec 2024</div>
+            <ul class="card-body">
+              <li>Conducted market analysis & competitive research</li>
+              <li>Provided insights supporting strategic decisions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-row">
+        <div class="edu-mini">
+          <div class="edu-inst">KJ Somaiya School of Engineering</div>
+          <div class="edu-deg">B.Tech CE · Sem IV</div>
+          <div class="edu-score">SGPA 9.18 ✦</div>
+        </div>
+        <div class="edu-mini">
+          <div class="edu-inst">Arya Gurukul Jr College</div>
+          <div class="edu-deg">Computer Science HSC</div>
+          <div class="edu-score">78.83%</div>
+        </div>
+        <div class="edu-mini">
+          <div class="edu-inst">CP Goenka International</div>
+          <div class="edu-deg">Science CISCE</div>
+          <div class="edu-score">93.5%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PAGE 3 — TECH STACK ══ -->
+  <section class="section" id="page3">
+    <canvas id="glitch-canvas"></canvas>
+    <div class="tech-content">
+      <div class="section-title" data-scramble="Tech Stack">Tech Stack</div>
+
+      <div class="tech-wrapper">
+        <div class="tech-category">
+          <div class="cat-label">Frontend</div>
+          <div class="tech-grid" id="tech-frontend"></div>
+        </div>
+        <div class="tech-category">
+          <div class="cat-label">Backend & AI</div>
+          <div class="tech-grid" id="tech-backend"></div>
+        </div>
+        <div class="tech-category">
+          <div class="cat-label">Data & Design</div>
+          <div class="tech-grid" id="tech-data"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PAGE 4 — PROJECTS (Feature 2: Spotlight + Feature 8: Flip Cards) ══ -->
+  <section class="section" id="page4">
+    <div class="page4-bg"></div>
+    <div class="spotlight-overlay" id="spotlight-overlay"></div>
+    <div class="projects-content">
+      <div class="projects-grid">
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">🛣️</div>
+              <div class="proj-name">Route5</div>
+              <div class="proj-tags">
+                <span class="proj-tag">React</span><span class="proj-tag rose">FinTech</span><span
+                  class="proj-tag cyan">AI</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">Route5</div>
+              <p>AI execution control plane for mid-tier financial institutions. Full product website, contact backend,
+                and UI architecture.</p>
+              <a href="https://github.com/jehdadina-jpg" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">📊</div>
+              <div class="proj-name">FinovateX 2026</div>
+              <div class="proj-tags">
+                <span class="proj-tag">Python</span><span class="proj-tag rose">Event</span><span
+                  class="proj-tag gold">Data</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">FinovateX 2026</div>
+              <p>7-hr FinTech Dual-Event consisting of AlgoTrade Challenge and Fraud Detection using Python.</p>
+              <a href="https://finovate-x.vercel.app/" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">🎓</div>
+              <div class="proj-name">Pointer Aid 2.0</div>
+              <div class="proj-tags">
+                <span class="proj-tag cyan">HTML/CSS/JS</span><span class="proj-tag gold">Tool</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">Pointer Aid 2.0</div>
+              <p>SGPI calculator for KJSSE Sem IV — 11 subjects, 24 credits, animated sliders, lock system, and
+                minimize-marks solver.</p>
+              <a href="https://pointeraidsem4.netlify.app" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">🗣️</div>
+              <div class="proj-name">sahayAK</div>
+              <div class="proj-tags">
+                <span class="proj-tag rose">AI</span><span class="proj-tag">Voice</span><span
+                  class="proj-tag cyan">Banking</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">sahayAK</div>
+              <p>AI-powered multilingual voice assistant for Indian bank branch desks. Pitch script, regional language
+                translation, GTM strategy.</p>
+              <a href="https://github.com/jehdadina-jpg" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">📈</div>
+              <div class="proj-name">Stock Research Agent</div>
+              <div class="proj-tags">
+                <span class="proj-tag">React</span><span class="proj-tag rose">Claude API</span><span
+                  class="proj-tag gold">Finance</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">Stock Research Agent</div>
+              <p>Bloomberg Terminal-inspired React frontend for a Claude-powered stock research agent with agentic loop
+                and tool use.</p>
+              <a href="https://github.com/jehdadina-jpg" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">🌐</div>
+              <div class="proj-name">BhashaBridge</div>
+              <div class="proj-tags">
+                <span class="proj-tag cyan">React</span><span class="proj-tag">WebGL</span><span
+                  class="proj-tag rose">NLP</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">BhashaBridge</div>
+              <p>Multilingual banking voice AI dashboard with WebGL Galaxy background and 25+ animated components for a
+                hackathon demo.</p>
+              <a href="https://github.com/jehdadina-jpg" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PAGE 5 — CONTACT (Feature 9: Shape Grid BG) ══ -->
+  <section class="section" id="page5">
+    <canvas id="shapegrid-canvas" class="shapegrid-canvas"></canvas>
+    <div class="contact-content">
+
+      <h2 class="contact-title">Let's build<br /><span>something great</span></h2>
+      <p class="contact-sub">Open to internships, collaborations, and interesting projects at the intersection of
+        fintech and AI.</p>
+      <div class="contact-links">
+        <div class="contact-row">
+          <a class="contact-link" href="https://github.com/jehdadina-jpg" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+            </svg>
+            GitHub
+          </a>
+          <a class="contact-link" href="https://www.codechef.com/users/jehdadina/" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon
+                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+            </svg>
+            CodeChef
+          </a>
+          <a class="contact-link" href="https://www.linkedin.com/in/jehdadina/" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+            LinkedIn
+          </a>
+          <a class="contact-link" href="https://www.instagram.com/jehdadina/" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            Instagram
+          </a>
+        </div>
+        <div class="contact-row">
+          <a class="contact-link" href="mailto:jehdadina@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            jehdadina@gmail.com
+          </a>
+          <a class="contact-link" href="tel:+917021434250">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.36 2.18 2 2 0 012.33 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+            </svg>
+            +91 70214 34250
+          </a>
+        </div>
+      </div>
+      <div class="contact-footer">
+        <span class="footer-item">🇮🇳 Mumbai, Maharashtra</span> <span class="footer-dot">·</span>
+        <span class="footer-item">📍 19.0760° N, 72.8777° E</span> <span class="footer-dot">·</span>
+        <span class="footer-item">🕒 <span id="mumbai-time">--:-- --</span></span>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
