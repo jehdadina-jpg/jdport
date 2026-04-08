@@ -50,17 +50,19 @@ updateNavButtons(0);
 
 // Lock global wheel scroll from changing sections
 window.addEventListener('wheel', (e) => {
-  // If we are NOT in the timeline box, we just prevent scrolling or do nothing.
-  // The Experience section already has a stopPropagation listener on its div.
-  // So here, we just prevent the default scroll behavior on the window.
-  // This is the "Scroll Lock".
-  if (!e.target.closest('.timeline-content')) {
+  if (!e.target.closest('.timeline-content') &&
+      !e.target.closest('.tech-content') &&
+      !e.target.closest('.projects-content') &&
+      !e.target.closest('.contact-content')) {
     e.preventDefault();
   }
 }, { passive: false });
 
 window.addEventListener('touchmove', (e) => {
-  if (!e.target.closest('.timeline-content')) {
+  if (!e.target.closest('.timeline-content') &&
+      !e.target.closest('.tech-content') &&
+      !e.target.closest('.projects-content') &&
+      !e.target.closest('.contact-content')) {
     e.preventDefault();
   }
 }, { passive: false });

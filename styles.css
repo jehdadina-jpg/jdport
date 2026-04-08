@@ -1335,6 +1335,26 @@ body {
   #nav-dots {
     display: none;
   }
+
+  /* Make large content blocks scrollable on mobile to fix vertical overflow/indentation */
+  .tech-content, .projects-content, .contact-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-bottom: 2rem;
+  }
+  
+  .tech-content::-webkit-scrollbar,
+  .projects-content::-webkit-scrollbar,
+  .contact-content::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .tech-content::-webkit-scrollbar-thumb,
+  .projects-content::-webkit-scrollbar-thumb,
+  .contact-content::-webkit-scrollbar-thumb {
+    background: var(--blue);
+    border-radius: 10px;
+  }
 }
 
 @media(max-width:480px) {
