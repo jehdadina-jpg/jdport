@@ -5,27 +5,47 @@
 const sections = document.querySelectorAll('.section');
 const dots = document.querySelectorAll('.dot');
 const sectionNames = ['Home', 'Experience', 'Skills', 'Projects', 'Contact'];
+const sectionSlugs = ['home', 'experience', 'skills', 'projects', 'contact'];
 let currentSectionIndex = 0;
 let isScrolling = false;
 
 // ─────────────────────────────────────────────────
 // NAV DOTS + SCROLL TRACKING
 // ─────────────────────────────────────────────────
-function goTo(i) {
+function goTo(i, opts) {
+  opts = opts || {};
   if (isScrolling) return;
   isScrolling = true;
   currentSectionIndex = i;
-  
+
   // Update dots
-  dots.forEach((d, j) => d.classList.toggle('active', i === j));
-  
+  dots.forEach((d, j) => {
+    d.classList.toggle('active', i === j);
+    d.setAttribute('aria-selected', i === j ? 'true' : 'false');
+  });
+
   // Smooth scroll
-  sections[i].scrollIntoView({ behavior: 'smooth' });
-  
+  sections[i].scrollIntoView({ behavior: opts.instant ? 'auto' : 'smooth' });
+
   updateNavbar(i);
   updateNavButtons(i);
-  
-  setTimeout(() => { isScrolling = false; }, 850);
+  updateProgressBar(i);
+
+  if (!opts.skipHash && history.replaceState) {
+    history.replaceState(null, '', '#' + sectionSlugs[i]);
+  }
+
+  const announcer = document.getElementById('a11y-announcer');
+  if (announcer) announcer.textContent = sectionNames[i] + ' section';
+
+  setTimeout(() => { isScrolling = false; }, opts.instant ? 50 : 850);
+}
+
+function updateProgressBar(i) {
+  const fill = document.getElementById('scroll-progress-fill');
+  if (!fill) return;
+  const pct = (i / (sections.length - 1)) * 100;
+  fill.style.width = pct + '%';
 }
 
 // ── NAVIGATION CONTROLS (Manual Only) ──
@@ -68,11 +88,31 @@ window.addEventListener('touchmove', (e) => {
 }, { passive: false });
 
 window.addEventListener('keydown', (e) => {
-  if (['ArrowDown', 'PageDown', 'ArrowUp', 'PageUp'].includes(e.key)) {
+  const typing = ['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName);
+
+  if (['ArrowDown', 'PageDown', 'ArrowUp', 'PageUp'].includes(e.key) && !typing) {
     e.preventDefault();
     if (isScrolling) return;
     if (['ArrowDown', 'PageDown'].includes(e.key)) goDown();
     if (['ArrowUp', 'PageUp'].includes(e.key)) goUp();
+  }
+
+  if (!typing && /^[1-5]$/.test(e.key) && !e.metaKey && !e.ctrlKey && !e.altKey) {
+    goTo(parseInt(e.key, 10) - 1);
+  }
+
+  if (!typing && e.key === '?') {
+    toggleShortcuts();
+  }
+
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    openCmdk();
+  }
+
+  if (e.key === 'Escape') {
+    closeCmdk();
+    closeShortcuts();
   }
 }, { passive: false });
 
@@ -96,11 +136,21 @@ const topNav = document.getElementById('top-nav');
 const navSectionName = document.getElementById('nav-section-name');
 const navLinks = document.querySelectorAll('.nav-links-bar a');
 
+const glowColors = [
+  'rgba(77,159,255,.14)',
+  'rgba(255,107,157,.12)',
+  'rgba(255,209,102,.12)',
+  'rgba(0,229,255,.12)',
+  'rgba(255,107,157,.12)',
+];
+
 function updateNavbar(idx) {
   topNav.classList.toggle('scrolled', idx > 0);
   navSectionName.textContent = sectionNames[idx] || '';
   navLinks.forEach((a, j) => a.classList.toggle('active', j === idx));
+  document.documentElement.style.setProperty('--glow-c', glowColors[idx] || glowColors[0]);
 }
+updateNavbar(0);
 
 // ─────────────────────────────────────────────────
 // FEATURE 1: BLUR TEXT REVEAL
@@ -822,14 +872,19 @@ initShapeGrid();
     { id: 'page3', event: 'canvas-toggle-glitch' },
     { id: 'page5', event: 'canvas-toggle-shapegrid' }
   ];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const state = {};
+
+  function dispatch(event, active) {
+    window.dispatchEvent(new CustomEvent(event, { detail: { active: reducedMotion ? false : active } }));
+  }
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const config = canvasMap.find(item => item.id === entry.target.id);
       if (config) {
-        window.dispatchEvent(new CustomEvent(config.event, {
-          detail: { active: entry.isIntersecting }
-        }));
+        state[config.event] = entry.isIntersecting;
+        if (!document.hidden) dispatch(config.event, entry.isIntersecting);
       }
     });
   }, { threshold: 0.1 });
@@ -837,6 +892,13 @@ initShapeGrid();
   canvasMap.forEach(item => {
     const el = document.getElementById(item.id);
     if (el) observer.observe(el);
+  });
+
+  // Pause background canvases when the tab isn't visible to save battery/CPU
+  document.addEventListener('visibilitychange', () => {
+    canvasMap.forEach(item => {
+      dispatch(item.event, document.hidden ? false : !!state[item.event]);
+    });
   });
 })();
 
@@ -869,6 +931,7 @@ function toggleMobileMenu() {
   } else {
     mobileOverlay.classList.add('active');
     hamburgerBtn.classList.add('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
   }
 }
 
@@ -876,4 +939,338 @@ function closeMobileMenu() {
   if (!mobileOverlay || !hamburgerBtn) return;
   mobileOverlay.classList.remove('active');
   hamburgerBtn.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
 }
+
+// ═══════════════════════════════════════════════════
+// BOOT SEQUENCE
+// ═══════════════════════════════════════════════════
+(function () {
+  const screen = document.getElementById('boot-screen');
+  const linesEl = document.getElementById('boot-lines');
+  if (!screen || !linesEl) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hour = new Date().getHours();
+  const script = [
+    { text: '> whoami', delay: 0 },
+    { text: 'jeh_dadina', delay: 300, ok: true },
+    { text: '> status --check', delay: 550 },
+    { text: 'fintech systems ... online', delay: 850, ok: true },
+    { text: 'ai/ml pipeline ... online', delay: 1050, ok: true },
+    { text: '> launching portfolio', delay: 1300 },
+  ];
+
+  function finish() {
+    screen.classList.add('hidden');
+    setTimeout(() => screen.remove(), 600);
+    window.removeEventListener('keydown', finish);
+    window.removeEventListener('click', finish);
+  }
+
+  if (reducedMotion) {
+    finish();
+    return;
+  }
+
+  script.forEach(line => {
+    setTimeout(() => {
+      const div = document.createElement('div');
+      div.className = 'boot-line' + (line.ok ? ' ok' : '');
+      div.textContent = line.text;
+      linesEl.appendChild(div);
+    }, line.delay);
+  });
+
+  window.addEventListener('keydown', finish);
+  window.addEventListener('click', finish);
+  setTimeout(finish, 2100);
+})();
+
+// ═══════════════════════════════════════════════════
+// TIME-OF-DAY GREETING
+// ═══════════════════════════════════════════════════
+(function () {
+  const el = document.getElementById('greeting-tag');
+  if (!el) return;
+  const h = new Date().getHours();
+  let msg = '🌙 Good night';
+  if (h >= 5 && h < 12) msg = '🌅 Good morning';
+  else if (h >= 12 && h < 17) msg = '☀️ Good afternoon';
+  else if (h >= 17 && h < 21) msg = '🌆 Good evening';
+  el.textContent = msg + ' — probably shipping something';
+})();
+
+// ═══════════════════════════════════════════════════
+// TOAST NOTIFICATIONS
+// ═══════════════════════════════════════════════════
+let toastTimer = null;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+// ═══════════════════════════════════════════════════
+// COMMAND PALETTE
+// ═══════════════════════════════════════════════════
+const cmdkCommands = [
+  { icon: '→', label: 'Go to Home', hint: '1', action: () => goTo(0) },
+  { icon: '→', label: 'Go to Experience', hint: '2', action: () => goTo(1) },
+  { icon: '→', label: 'Go to Skills', hint: '3', action: () => goTo(2) },
+  { icon: '→', label: 'Go to Projects', hint: '4', action: () => goTo(3) },
+  { icon: '→', label: 'Go to Contact', hint: '5', action: () => goTo(4) },
+  {
+    icon: '⧉', label: 'Copy email address', hint: '', action: async () => {
+      try { await navigator.clipboard.writeText('jehdadina@gmail.com'); showToast('Email copied to clipboard ✓'); }
+      catch { showToast('Copy failed — jehdadina@gmail.com'); }
+    }
+  },
+  { icon: '✉', label: 'Email Jeh directly', hint: '', action: () => window.location.href = 'mailto:jehdadina@gmail.com' },
+  { icon: '📄', label: 'Request resume', hint: '', action: () => window.location.href = 'mailto:jehdadina@gmail.com?subject=Resume%20Request&body=Hi%20Jeh%2C%0A%0ACould%20you%20send%20over%20your%20resume%3F%0A%0AThanks!' },
+  { icon: '⌘', label: 'GitHub', hint: '↗', action: () => window.open('https://github.com/jehdadina-jpg', '_blank') },
+  { icon: '⌘', label: 'LinkedIn', hint: '↗', action: () => window.open('https://www.linkedin.com/in/jehdadina/', '_blank') },
+  { icon: '⌘', label: 'Instagram', hint: '↗', action: () => window.open('https://www.instagram.com/jehdadina/', '_blank') },
+  { icon: '⌘', label: 'CodeChef', hint: '↗', action: () => window.open('https://www.codechef.com/users/jehdadina/', '_blank') },
+  { icon: '?', label: 'Show keyboard shortcuts', hint: '?', action: () => toggleShortcuts() },
+];
+
+let cmdkActiveIndex = 0;
+let cmdkFiltered = cmdkCommands.slice();
+
+function renderCmdkList() {
+  const list = document.getElementById('cmdk-list');
+  if (!list) return;
+  if (!cmdkFiltered.length) {
+    list.innerHTML = '<div class="cmdk-empty">No matching commands</div>';
+    return;
+  }
+  list.innerHTML = cmdkFiltered.map((cmd, i) => `
+    <div class="cmdk-item${i === cmdkActiveIndex ? ' active' : ''}" data-idx="${i}">
+      <span class="cmdk-item-icon">${cmd.icon}</span>
+      <span>${cmd.label}</span>
+      ${cmd.hint ? `<span class="cmdk-item-hint">${cmd.hint}</span>` : ''}
+    </div>
+  `).join('');
+  [...list.children].forEach(child => {
+    child.addEventListener('click', () => {
+      const cmd = cmdkFiltered[parseInt(child.dataset.idx, 10)];
+      if (cmd) { cmd.action(); closeCmdk(); }
+    });
+  });
+}
+
+function openCmdk() {
+  const overlay = document.getElementById('cmdk-overlay');
+  const input = document.getElementById('cmdk-input');
+  if (!overlay) return;
+  closeShortcuts();
+  cmdkFiltered = cmdkCommands.slice();
+  cmdkActiveIndex = 0;
+  renderCmdkList();
+  overlay.classList.add('open');
+  if (input) { input.value = ''; setTimeout(() => input.focus(), 50); }
+}
+
+function closeCmdk() {
+  const overlay = document.getElementById('cmdk-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+(function () {
+  const overlay = document.getElementById('cmdk-overlay');
+  const input = document.getElementById('cmdk-input');
+  if (!overlay || !input) return;
+
+  overlay.addEventListener('mousedown', (e) => {
+    if (e.target === overlay) closeCmdk();
+  });
+
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    cmdkFiltered = cmdkCommands.filter(c => c.label.toLowerCase().includes(q));
+    cmdkActiveIndex = 0;
+    renderCmdkList();
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      cmdkActiveIndex = Math.min(cmdkActiveIndex + 1, cmdkFiltered.length - 1);
+      renderCmdkList();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      cmdkActiveIndex = Math.max(cmdkActiveIndex - 1, 0);
+      renderCmdkList();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const cmd = cmdkFiltered[cmdkActiveIndex];
+      if (cmd) { cmd.action(); closeCmdk(); }
+    }
+  });
+})();
+
+// ═══════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS PANEL
+// ═══════════════════════════════════════════════════
+function toggleShortcuts() {
+  const overlay = document.getElementById('shortcuts-overlay');
+  if (!overlay) return;
+  if (overlay.classList.contains('open')) closeShortcuts();
+  else { closeCmdk(); overlay.classList.add('open'); }
+}
+function closeShortcuts() {
+  const overlay = document.getElementById('shortcuts-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+(function () {
+  const overlay = document.getElementById('shortcuts-overlay');
+  if (!overlay) return;
+  overlay.addEventListener('mousedown', (e) => {
+    if (e.target === overlay) closeShortcuts();
+  });
+})();
+
+// ═══════════════════════════════════════════════════
+// URL HASH DEEP LINKING
+// ═══════════════════════════════════════════════════
+(function () {
+  function jumpFromHash() {
+    const slug = window.location.hash.replace('#', '');
+    const idx = sectionSlugs.indexOf(slug);
+    if (idx > -1) goTo(idx, { instant: true, skipHash: true });
+  }
+  if (window.location.hash) setTimeout(jumpFromHash, 100);
+  window.addEventListener('popstate', jumpFromHash);
+})();
+
+// ═══════════════════════════════════════════════════
+// CURSOR GLOW (desktop, fine pointer, motion-safe only)
+// ═══════════════════════════════════════════════════
+(function () {
+  const glow = document.getElementById('cursor-glow');
+  if (!glow) return;
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!canHover || reducedMotion) return;
+
+  let tx = window.innerWidth / 2, ty = window.innerHeight / 2, x = tx, y = ty;
+  window.addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY;
+    glow.classList.add('active');
+  });
+  window.addEventListener('mouseleave', () => glow.classList.remove('active'));
+
+  function loop() {
+    x += (tx - x) * 0.15;
+    y += (ty - y) * 0.15;
+    glow.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// ═══════════════════════════════════════════════════
+// MOBILE SWIPE NAVIGATION
+// ═══════════════════════════════════════════════════
+(function () {
+  let startY = null;
+  const scrollableSelectors = '.timeline-content, .tech-content, .projects-content, .contact-content';
+
+  window.addEventListener('touchstart', e => {
+    if (e.target.closest(scrollableSelectors)) { startY = null; return; }
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchend', e => {
+    if (startY === null) return;
+    const endY = e.changedTouches[0].clientY;
+    const delta = startY - endY;
+    if (Math.abs(delta) > 60) {
+      if (delta > 0) goDown();
+      else goUp();
+    }
+    startY = null;
+  }, { passive: true });
+})();
+
+// ═══════════════════════════════════════════════════
+// KONAMI CODE EASTER EGG
+// ═══════════════════════════════════════════════════
+(function () {
+  const sequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let pos = 0;
+
+  window.addEventListener('keydown', e => {
+    const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (key === sequence[pos]) {
+      pos++;
+      if (pos === sequence.length) { pos = 0; triggerKonami(); }
+    } else {
+      pos = (key === sequence[0]) ? 1 : 0;
+    }
+  });
+
+  function triggerKonami() {
+    const overlay = document.getElementById('konami-overlay');
+    if (!overlay) return;
+    overlay.classList.add('open');
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) runRain();
+    const close = () => overlay.classList.remove('open');
+    overlay.addEventListener('click', close, { once: true });
+    setTimeout(close, 4000);
+  }
+
+  function runRain() {
+    const canvas = document.getElementById('konami-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cols = Math.floor(canvas.width / 18);
+    const drops = new Array(cols).fill(0);
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let frames = 0;
+    const maxFrames = 240;
+
+    function draw() {
+      frames++;
+      ctx.fillStyle = 'rgba(3,5,15,.12)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#4d9fff';
+      ctx.font = '16px monospace';
+      drops.forEach((d, i) => {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(char, i * 18, d * 18);
+        drops[i] = (d * 18 > canvas.height && Math.random() > .975) ? 0 : d + 1;
+      });
+      if (frames < maxFrames && document.getElementById('konami-overlay').classList.contains('open')) {
+        requestAnimationFrame(draw);
+      }
+    }
+    draw();
+  }
+})();
+
+// ═══════════════════════════════════════════════════
+// MAGNETIC HOVER (buttons, socials, filter chips)
+// ═══════════════════════════════════════════════════
+(function () {
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!canHover || reducedMotion) return;
+
+  const strength = 0.35;
+  document.querySelectorAll('.magnetic').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+})();

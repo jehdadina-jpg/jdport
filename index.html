@@ -14,6 +14,40 @@
 
   <link rel="stylesheet" href="styles.css" />
 
+  <meta name="theme-color" content="#060811" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23060811'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='800' font-size='28' fill='%234d9fff' text-anchor='middle'%3EJD%3C/text%3E%3C/svg%3E" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Jeh Dadina — Portfolio" />
+  <meta property="og:description"
+    content="Portfolio of Jeh Dadina — Fintech builder, AI systems thinker, frontend engineer at KJSSE." />
+  <meta property="og:image" content="jehface.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jeh Dadina — Portfolio" />
+  <meta name="twitter:description"
+    content="Portfolio of Jeh Dadina — Fintech builder, AI systems thinker, frontend engineer at KJSSE." />
+  <meta name="twitter:image" content="jehface.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jeh Dadina",
+    "email": "mailto:jehdadina@gmail.com",
+    "image": "jehface.png",
+    "jobTitle": "FinTech Builder & Frontend Engineer",
+    "affiliation": "KJ Somaiya School of Engineering",
+    "sameAs": [
+      "https://github.com/jehdadina-jpg",
+      "https://www.linkedin.com/in/jehdadina/",
+      "https://www.instagram.com/jehdadina/",
+      "https://www.codechef.com/users/jehdadina/"
+    ]
+  }
+  </script>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MH7C6SNWC"></script>
   <script>
@@ -29,6 +63,65 @@
 
 <body>
 
+  <a href="#page1" class="skip-link">Skip to content</a>
+  <div id="a11y-announcer" class="sr-only" aria-live="polite"></div>
+
+  <!-- ═══ BOOT SEQUENCE ═══ -->
+  <div id="boot-screen">
+    <div class="boot-lines" id="boot-lines"></div>
+    <div class="boot-skip">press any key to skip</div>
+  </div>
+
+  <!-- ═══ CURSOR GLOW (decorative, desktop only) ═══ -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- ═══ SCROLL PROGRESS ═══ -->
+  <div id="scroll-progress" aria-hidden="true">
+    <div id="scroll-progress-fill"></div>
+  </div>
+
+  <!-- ═══ COMMAND PALETTE ═══ -->
+  <div id="cmdk-overlay" class="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="cmdk-box">
+      <div class="cmdk-input-row">
+        <span class="cmdk-prompt">›</span>
+        <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Jump to a section, open a link, run a command…"
+          autocomplete="off" spellcheck="false" />
+        <kbd class="cmdk-esc">esc</kbd>
+      </div>
+      <div class="cmdk-list" id="cmdk-list"></div>
+    </div>
+  </div>
+
+  <!-- ═══ KEYBOARD SHORTCUTS ═══ -->
+  <div id="shortcuts-overlay" class="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+    <div class="cmdk-box shortcuts-box">
+      <div class="shortcuts-title">Keyboard Shortcuts</div>
+      <div class="shortcuts-grid">
+        <div class="shortcuts-keys"><kbd>↑</kbd><kbd>↓</kbd></div>
+        <div>Move between sections</div>
+        <div class="shortcuts-keys"><kbd>1</kbd>–<kbd>5</kbd></div>
+        <div>Jump straight to a section</div>
+        <div class="shortcuts-keys"><kbd>Ctrl</kbd>+<kbd>K</kbd></div>
+        <div>Open command palette</div>
+        <div class="shortcuts-keys"><kbd>?</kbd></div>
+        <div>Toggle this panel</div>
+        <div class="shortcuts-keys"><kbd>Esc</kbd></div>
+        <div>Close any overlay</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TOAST ═══ -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- ═══ EASTER EGG ═══ -->
+  <div id="konami-overlay" class="konami-overlay" aria-hidden="true">
+    <canvas id="konami-canvas"></canvas>
+    <div class="konami-msg">🥚 You found the easter egg.<br /><span>Achievement unlocked: Curious Developer</span>
+    </div>
+  </div>
+
   <!-- ═══ STICKY FLOATING NAVBAR (Feature 10) ═══ -->
   <nav id="top-nav">
     <div class="nav-brand">JD</div>
@@ -39,9 +132,14 @@
       <a onclick="goTo(2)">Skills</a>
       <a onclick="goTo(3)">Projects</a>
       <a onclick="goTo(4)">Contact</a>
+      <button class="cmdk-trigger magnetic" onclick="openCmdk()" aria-label="Open command palette" type="button">
+        <span class="cmdk-key">⌘</span>K
+      </button>
     </div>
     <!-- Hamburger Icon for Mobile -->
-    <div class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()">
+    <div class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" role="button" tabindex="0"
+      aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu-overlay"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleMobileMenu();}">
       <span></span>
       <span></span>
       <span></span>
@@ -60,22 +158,35 @@
   </div>
 
   <!-- NAV DOTS -->
-  <div id="nav-dots">
-    <div class="dot active" data-page="1" onclick="goTo(0)"></div>
-    <div class="dot" data-page="2" onclick="goTo(1)"></div>
-    <div class="dot" data-page="3" onclick="goTo(2)"></div>
-    <div class="dot" data-page="4" onclick="goTo(3)"></div>
-    <div class="dot" data-page="5" onclick="goTo(4)"></div>
+  <div id="nav-dots" role="tablist" aria-label="Section navigation">
+    <div class="dot active" data-page="1" onclick="goTo(0)" role="tab" aria-selected="true" tabindex="0"
+      aria-label="Go to Home" onkeydown="if(event.key==='Enter'){goTo(0)}"></div>
+    <div class="dot" data-page="2" onclick="goTo(1)" role="tab" aria-selected="false" tabindex="0"
+      aria-label="Go to Experience" onkeydown="if(event.key==='Enter'){goTo(1)}"></div>
+    <div class="dot" data-page="3" onclick="goTo(2)" role="tab" aria-selected="false" tabindex="0"
+      aria-label="Go to Skills" onkeydown="if(event.key==='Enter'){goTo(2)}"></div>
+    <div class="dot" data-page="4" onclick="goTo(3)" role="tab" aria-selected="false" tabindex="0"
+      aria-label="Go to Projects" onkeydown="if(event.key==='Enter'){goTo(3)}"></div>
+    <div class="dot" data-page="5" onclick="goTo(4)" role="tab" aria-selected="false" tabindex="0"
+      aria-label="Go to Contact" onkeydown="if(event.key==='Enter'){goTo(4)}"></div>
   </div>
 
   <!-- UP/DOWN NAVIGATION -->
   <div class="nav-controls">
-    <button id="nav-up" title="Previous Page" onclick="goUp()">
+    <button id="nav-shortcuts-btn" title="Keyboard shortcuts (?)" aria-label="Show keyboard shortcuts"
+      onclick="toggleShortcuts()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2 1.7-2 3.3" stroke-linecap="round" />
+        <circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none" />
+      </svg>
+    </button>
+    <button id="nav-up" title="Previous Page" aria-label="Previous page" onclick="goUp()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M18 15l-6-6-6 6" />
       </svg>
     </button>
-    <button id="nav-down" title="Next Page" onclick="goDown()">
+    <button id="nav-down" title="Next Page" aria-label="Next page" onclick="goDown()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M6 9l6 6 6-6" />
       </svg>
@@ -90,7 +201,7 @@
         <div class="card-glow"></div>
         <figure class="tilted-card-figure fade-up d1" id="tilted-card">
           <div class="tilted-card-inner">
-            <img class="tilted-card-img" src="jehface.png" />
+            <img class="tilted-card-img" src="jehface.png" alt="Portrait of Jeh Dadina" width="260" height="330" />
           </div>
           <figcaption class="tilted-card-caption">Jeh Dadina</figcaption>
         </figure>
@@ -98,6 +209,7 @@
       </div>
 
       <div class="hero-right">
+        <div class="hero-tag fade-up" id="greeting-tag"></div>
         <!-- Feature 1: BlurText hero name -->
         <h1 class="hero-name fade-up d2" id="hero-name-el">
           <span class="blur-line" data-text="Jeh"></span><br />
@@ -108,28 +220,28 @@
 
         <!-- Social SVGs -->
         <div class="hero-socials fade-up d4" style="display:flex; gap:0.9rem; flex-wrap:wrap;">
-          <a class="hero-social-link" href="https://github.com/jehdadina-jpg" target="_blank" title="GitHub"
+          <a class="hero-social-link magnetic" href="https://github.com/jehdadina-jpg" target="_blank" title="GitHub"
             aria-label="GitHub">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
             </svg>
           </a>
-          <a class="hero-social-link" href="https://www.codechef.com/users/jehdadina/" target="_blank" title="CodeChef"
+          <a class="hero-social-link magnetic" href="https://www.codechef.com/users/jehdadina/" target="_blank" title="CodeChef"
             aria-label="CodeChef">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polygon
                 points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
             </svg>
           </a>
-          <a class="hero-social-link" href="https://www.linkedin.com/in/jehdadina/" target="_blank" title="LinkedIn"
+          <a class="hero-social-link magnetic" href="https://www.linkedin.com/in/jehdadina/" target="_blank" title="LinkedIn"
             aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
               <circle cx="4" cy="4" r="2" />
             </svg>
           </a>
-          <a class="hero-social-link" href="https://www.instagram.com/jehdadina/" target="_blank" title="Instagram"
+          <a class="hero-social-link magnetic" href="https://www.instagram.com/jehdadina/" target="_blank" title="Instagram"
             aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -138,7 +250,7 @@
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
           </a>
-          <a class="hero-social-link" href="mailto:jehdadina@gmail.com" title="Email" aria-label="Email">
+          <a class="hero-social-link magnetic" href="mailto:jehdadina@gmail.com" title="Email" aria-label="Email">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
               <polyline points="22,6 12,13 2,6" />
@@ -376,28 +488,28 @@
         fintech and AI.</p>
       <div class="contact-links">
         <div class="contact-row">
-          <a class="contact-link" href="https://github.com/jehdadina-jpg" target="_blank">
+          <a class="contact-link magnetic" href="https://github.com/jehdadina-jpg" target="_blank">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
             </svg>
             GitHub
           </a>
-          <a class="contact-link" href="https://www.codechef.com/users/jehdadina/" target="_blank">
+          <a class="contact-link magnetic" href="https://www.codechef.com/users/jehdadina/" target="_blank">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polygon
                 points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
             </svg>
             CodeChef
           </a>
-          <a class="contact-link" href="https://www.linkedin.com/in/jehdadina/" target="_blank">
+          <a class="contact-link magnetic" href="https://www.linkedin.com/in/jehdadina/" target="_blank">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
               <circle cx="4" cy="4" r="2" />
             </svg>
             LinkedIn
           </a>
-          <a class="contact-link" href="https://www.instagram.com/jehdadina/" target="_blank">
+          <a class="contact-link magnetic" href="https://www.instagram.com/jehdadina/" target="_blank">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -408,7 +520,7 @@
           </a>
         </div>
         <div class="contact-row">
-          <a class="contact-link" href="mailto:jehdadina@gmail.com">
+          <a class="contact-link magnetic" href="mailto:jehdadina@gmail.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
               <polyline points="22,6 12,13 2,6" />
