@@ -102,6 +102,14 @@ body {
   height: 19px;
 }
 
+.icon-box-img {
+  width: 21px;
+  height: 21px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
 .icon-box-btn:hover {
   background: rgba(255, 255, 255, .12);
   border-color: rgba(255, 255, 255, .28);
