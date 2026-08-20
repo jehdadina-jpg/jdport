@@ -151,12 +151,37 @@
   <nav id="top-nav">
     <div class="nav-brand-group">
       <div class="nav-brand">JD</div>
-      <button id="bike-nav-btn" class="bike-nav-btn magnetic" onclick="triggerSakiRide()" type="button"
-        aria-label="Summon Saki — Jeh's Kawasaki Ninja 300" title="Saki 🏍️">🏍️</button>
-      <button id="coffee-nav-btn" class="bike-nav-btn magnetic" onclick="openCoffeeReveal()" type="button"
-        aria-label="Jeh's coffee order" title="Coffee ☕">☕</button>
-      <button id="laptop-nav-btn" class="bike-nav-btn magnetic" onclick="openLaptopReveal()" type="button"
-        aria-label="Jeh's setup" title="Setup 💻">💻</button>
+      <div class="icon-box">
+        <span class="icon-box-hint">Click me</span>
+        <button id="bike-nav-btn" class="icon-box-btn magnetic-pop" onclick="triggerSakiRide()" type="button"
+          aria-label="Summon Saki — Jeh's Kawasaki Ninja 300" title="Saki">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="5.5" cy="17.5" r="2.5" />
+            <circle cx="18.5" cy="17.5" r="2.5" />
+            <path d="M5.5 17.5h4l2-4h4l2 4h2.5" />
+            <path d="M11.5 13.5l2-3h3" />
+            <path d="M9 8h3" />
+          </svg>
+        </button>
+        <button id="coffee-nav-btn" class="icon-box-btn magnetic-pop" onclick="openCoffeeReveal()" type="button"
+          aria-label="Jeh's coffee order" title="Coffee">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M4 8h13v6a5 5 0 01-5 5H9a5 5 0 01-5-5V8z" />
+            <path d="M17 9h1.5a2.5 2.5 0 010 5H17" />
+            <path d="M7 3c-.5 1 .5 1.5 0 2.5M10.5 3c-.5 1 .5 1.5 0 2.5" />
+          </svg>
+        </button>
+        <button id="laptop-nav-btn" class="icon-box-btn magnetic-pop" onclick="openLaptopReveal()" type="button"
+          aria-label="Jeh's setup" title="Setup">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="10" rx="1" />
+            <path d="M2 18.5h20l-1.5-3H3.5z" />
+          </svg>
+        </button>
+      </div>
     </div>
     <div class="nav-section-name" id="nav-section-name">Home</div>
     <div class="nav-links-bar">
@@ -302,14 +327,16 @@
 
       <div class="timeline">
         <div class="timeline-line"></div>
+        <div class="timeline-pulse"></div>
 
         <div class="tl-item tl-left">
-          <div class="tl-dot"></div>
-          <div class="glow-card tl-card">
+          <div class="tl-dot tl-dot-blue"></div>
+          <div class="glow-card tl-card tl-card-blue">
             <div class="card-org"><a href="https://swdc.somaiya.edu/p/ftc" target="_blank" class="card-org-link">Finance
                 & Technology Club · KJSSE</a></div>
             <div class="card-role">Founder / FinTech Head</div>
-            <div class="card-dur">Jan 2025 – Present</div>
+            <div class="card-dur">Jan 2025 – <span class="live-badge"><span class="live-dot"></span>Present</span>
+            </div>
             <ul class="card-body">
               <li>Organized FinovateX 2026 — A 7-hour dual event consisting of AlgoTrading and Fraud Detection</li>
               <li>Authored fintech & finance research papers and book chapters</li>
@@ -318,11 +345,12 @@
         </div>
 
         <div class="tl-item tl-right">
-          <div class="tl-dot"></div>
-          <div class="glow-card tl-card">
+          <div class="tl-dot tl-dot-rose"></div>
+          <div class="glow-card tl-card tl-card-rose">
             <div class="card-org">Rayze Technologies</div>
             <div class="card-role">Intern — Founders Office</div>
-            <div class="card-dur">Mar 2025 – Present</div>
+            <div class="card-dur">Mar 2025 – <span class="live-badge"><span class="live-dot"></span>Present</span>
+            </div>
             <ul class="card-body">
               <li>Supporting founders on Stackbase</li>
               <li>Contributing to product roadmap for mid-tier financial institutions</li>
@@ -331,8 +359,8 @@
         </div>
 
         <div class="tl-item tl-left">
-          <div class="tl-dot"></div>
-          <div class="glow-card tl-card">
+          <div class="tl-dot tl-dot-gold"></div>
+          <div class="glow-card tl-card tl-card-gold">
             <div class="card-org">TÜV Rheinland India</div>
             <div class="card-role">Intern — Industrial Services & Cyber Security</div>
             <div class="card-dur">Aug – Dec 2024</div>
@@ -348,19 +376,34 @@
         <div class="edu-mini">
           <div class="edu-inst">KJ Somaiya School of Engineering</div>
           <div class="edu-deg">B.Tech COMPS · Sem V</div>
-          <div class="edu-score">SGPA 9.04 ✦</div>
+          <div class="edu-score">SGPA 9.04</div>
+          <div class="edu-bar">
+            <div class="edu-bar-fill" style="width:90.4%"></div>
+          </div>
         </div>
         <div class="edu-mini">
           <div class="edu-inst">Arya Gurukul Jr College</div>
           <div class="edu-deg">Computer Science HSC</div>
           <div class="edu-score">78.83%</div>
+          <div class="edu-bar">
+            <div class="edu-bar-fill" style="width:78.83%"></div>
+          </div>
         </div>
         <div class="edu-mini">
           <div class="edu-inst">CP Goenka International</div>
           <div class="edu-deg">Science CISCE</div>
           <div class="edu-score">93.5%</div>
+          <div class="edu-bar">
+            <div class="edu-bar-fill" style="width:93.5%"></div>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="timeline-scroll-cue" id="timeline-scroll-cue">
+      <span>more below</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M6 9l6 6 6-6" />
+      </svg>
     </div>
   </section>
 

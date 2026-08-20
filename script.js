@@ -285,6 +285,38 @@ if (tlContent) {
   }, { passive: false });
 }
 
+// Subtle 3D tilt on timeline cards, matching the hero profile card treatment
+(function () {
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!canHover) return;
+  document.querySelectorAll('.tl-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      const rx = (y / (r.height / 2)) * -4;
+      const ry = (x / (r.width / 2)) * 4;
+      card.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+})();
+
+// "More below" scroll cue — only shown when the box actually overflows
+(function () {
+  const cue = document.getElementById('timeline-scroll-cue');
+  if (!tlContent || !cue) return;
+  function updateCue() {
+    const overflows = tlContent.scrollHeight > tlContent.clientHeight + 4;
+    const atBottom = tlContent.scrollTop + tlContent.clientHeight >= tlContent.scrollHeight - 4;
+    cue.classList.toggle('visible', overflows && !atBottom);
+  }
+  updateCue();
+  tlContent.addEventListener('scroll', updateCue);
+  window.addEventListener('resize', updateCue);
+  new ResizeObserver(updateCue).observe(tlContent);
+})();
+
 // ─────────────────────────────────────────────────
 // FEATURE 7: SCRAMBLE TEXT ON SECTION HEADINGS
 // ─────────────────────────────────────────────────
@@ -1357,6 +1389,18 @@ function closeLaptopReveal() {
       const x = e.clientX - r.left - r.width / 2;
       const y = e.clientY - r.top - r.height / 2;
       el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+
+  // Stronger variant: pull + grow, for the nav icon-box buttons
+  const popStrength = 0.4;
+  document.querySelectorAll('.magnetic-pop').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      el.style.transform = `translate(${x * popStrength}px, ${y * popStrength}px) scale(1.18)`;
     });
     el.addEventListener('mouseleave', () => { el.style.transform = ''; });
   });
