@@ -1898,7 +1898,7 @@ body::after {
   z-index: 1;
   pointer-events: none;
   background-color: #1d4ed8;
-  opacity: .16;
+  opacity: .05;
   mix-blend-mode: screen;
   transition: background-color 1.1s cubic-bezier(.4, 0, .2, 1);
 }
