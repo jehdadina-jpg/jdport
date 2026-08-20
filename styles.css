@@ -71,8 +71,6 @@ body {
   font-weight: 800;
   font-size: 1.2rem;
   color: var(--blue);
-  opacity: 0;
-  transition: opacity .4s;
 }
 
 .icon-box {
@@ -110,18 +108,18 @@ body {
 }
 
 #bike-nav-btn:hover {
-  box-shadow: 0 0 12px rgba(74, 222, 128, .45);
-  border-color: rgba(74, 222, 128, .5);
+  box-shadow: 0 0 8px rgba(47, 158, 90, .3);
+  border-color: rgba(47, 158, 90, .4);
 }
 
 #coffee-nav-btn:hover {
-  box-shadow: 0 0 12px rgba(169, 113, 75, .5);
-  border-color: rgba(200, 160, 120, .5);
+  box-shadow: 0 0 8px rgba(124, 87, 56, .35);
+  border-color: rgba(160, 130, 95, .4);
 }
 
 #laptop-nav-btn:hover {
-  box-shadow: 0 0 12px rgba(77, 159, 255, .45);
-  border-color: rgba(77, 159, 255, .5);
+  box-shadow: 0 0 8px rgba(37, 99, 235, .3);
+  border-color: rgba(37, 99, 235, .4);
 }
 
 
@@ -400,19 +398,20 @@ body {
   position: relative;
   z-index: 10;
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 230px 1fr;
   gap: 2.5rem;
   align-items: center;
-  max-width: 1060px;
-  width: 90%;
+  justify-content: center;
+  max-width: 860px;
+  width: 88%;
   margin: 0 auto;
 }
 
 /* ── Feature 5: Profile card 3D tilt ── */
 .tilted-card-figure {
   position: relative;
-  width: 260px;
-  height: 330px;
+  width: 220px;
+  height: 280px;
   perspective: 800px;
   display: flex;
   flex-direction: column;
@@ -564,7 +563,7 @@ body {
 /* ── Feature 1: BlurText hero name ── */
 .hero-name {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
   font-weight: 800;
   line-height: 1;
   color: #fff;
@@ -707,12 +706,15 @@ body {
 
 .timeline-content {
   background: rgba(255, 255, 255, .03);
-  padding: 1.4rem;
+  padding: 1.3rem 1.6rem;
   border-radius: 12px;
   border: 1px solid var(--border);
   position: relative;
   transition: all .3s;
-  max-height: min(720px, 78vh);
+  max-width: 780px;
+  width: 90%;
+  margin: 0 auto;
+  max-height: min(640px, 72vh);
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -780,11 +782,11 @@ body {
 .section-title {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: #fff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   position: relative;
-  padding-bottom: .9rem;
+  padding-bottom: .75rem;
 }
 
 .section-title::after {
@@ -852,7 +854,7 @@ body {
 .tl-item {
   position: relative;
   width: 50%;
-  padding: 0 2.5rem 1.4rem;
+  padding: 0 1.8rem 1.4rem;
   opacity: 0;
   transform: translateX(-40px);
   transition: opacity .7s ease, transform .7s ease;
@@ -1240,8 +1242,10 @@ body {
 .page4-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(77, 159, 255, .08), transparent),
-    radial-gradient(ellipse 60% 60% at 100% 100%, rgba(255, 107, 157, .06), transparent);
+  background: radial-gradient(ellipse 70% 55% at 12% 0%, rgba(77, 159, 255, .14), transparent 60%),
+    radial-gradient(ellipse 55% 55% at 85% 15%, rgba(0, 229, 255, .1), transparent 60%),
+    radial-gradient(ellipse 65% 60% at 100% 100%, rgba(255, 107, 157, .11), transparent 60%),
+    radial-gradient(ellipse 55% 50% at 5% 100%, rgba(255, 209, 102, .08), transparent 60%);
 }
 
 /* Feature 2: Spotlight overlay */
@@ -1508,10 +1512,53 @@ body {
   flex-shrink: 0;
 }
 
+/* Brand colors — filled gradients, not just tinted borders */
+.brand-github {
+  background: linear-gradient(135deg, #3a3f4a, #16181d);
+  border-color: rgba(255, 255, 255, .16);
+  color: #f3f4f6;
+}
+
+.brand-codechef {
+  background: linear-gradient(135deg, #d68a3f, #8b4a1f);
+  border-color: rgba(214, 138, 63, .5);
+  color: #fff3e6;
+}
+
+.brand-linkedin {
+  background: linear-gradient(135deg, #2e9bf0, #0a4e94);
+  border-color: rgba(10, 102, 194, .5);
+  color: #fff;
+}
+
+.brand-instagram {
+  background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
+  border-color: rgba(225, 48, 108, .5);
+  color: #fff;
+}
+
+.brand-email {
+  background: linear-gradient(135deg, #3ddc84, #1a8f52);
+  border-color: rgba(61, 220, 132, .5);
+  color: #05170c;
+}
+
+.brand-github:hover,
+.brand-codechef:hover,
+.brand-linkedin:hover,
+.brand-instagram:hover,
+.brand-email:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
+}
+
 .contact-footer {
+  position: relative;
+  z-index: 3;
   font-family: 'Space Mono', monospace;
   font-size: .7rem;
-  color: rgba(255, 255, 255, .34);
+  color: #ffd60a;
   margin-top: 2rem;
   display: flex;
   justify-content: center;
@@ -1524,10 +1571,14 @@ body {
   display: flex;
   align-items: center;
   gap: .3rem;
+  background: rgba(0, 0, 0, .65);
+  padding: .35rem .7rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 214, 10, .15);
 }
 
 .footer-dot {
-  color: rgba(255, 255, 255, .1);
+  color: rgba(255, 214, 10, .3);
 }
 
 /* ══════════════════════════════════════
@@ -1584,8 +1635,8 @@ body {
   }
 
   .tilted-card-figure {
-    width: 220px;
-    height: 280px;
+    width: 190px;
+    height: 240px;
     margin: 0 auto 1rem;
   }
 
@@ -1597,7 +1648,7 @@ body {
   }
   
   .hero-name {
-    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    font-size: clamp(1.9rem, 7vw, 2.7rem);
   }
 
   .hero-sub {
@@ -1860,30 +1911,18 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
+  z-index: 1;
   pointer-events: none;
   line-height: 0;
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 45%);
-  mask-image: linear-gradient(180deg, transparent, #000 45%);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 55%);
+  mask-image: linear-gradient(180deg, transparent, #000 55%);
 }
 
 .mumbai-skyline img {
   width: 100%;
   height: auto;
-  max-height: 230px;
-  object-fit: contain;
-  object-position: bottom;
   display: block;
-  opacity: .45;
-  image-rendering: pixelated;
-  filter: saturate(1.1);
-}
-
-@media (max-width: 768px) {
-  .mumbai-skyline img {
-    max-height: 130px;
-    opacity: .35;
-  }
+  opacity: .4;
 }
 
 /* ══════════════════════════════════════
