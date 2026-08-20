@@ -147,11 +147,22 @@ const glowColors = [
   'rgba(255,107,157,.12)',
 ];
 
+// Ambient wash that morphs as you move between sections
+const ambientColors = [
+  '#1d4ed8', // Home — deep blue
+  '#6d28d9', // Experience — violet
+  '#0e7490', // Skills — teal
+  '#be185d', // Projects — magenta
+  '#b45309', // Contact — amber
+];
+
 function updateNavbar(idx) {
   topNav.classList.toggle('scrolled', idx > 0);
   navSectionName.textContent = sectionNames[idx] || '';
   navLinks.forEach((a, j) => a.classList.toggle('active', j === idx));
   document.documentElement.style.setProperty('--glow-c', glowColors[idx] || glowColors[0]);
+  const ambientEl = document.getElementById('ambient-morph');
+  if (ambientEl) ambientEl.style.backgroundColor = ambientColors[idx] || ambientColors[0];
 }
 updateNavbar(0);
 
@@ -366,6 +377,27 @@ if (tlContent) {
     const r = page4.getBoundingClientRect();
     overlay.style.setProperty('--sx', `${e.clientX - r.left}px`);
     overlay.style.setProperty('--sy', `${e.clientY - r.top}px`);
+  });
+})();
+
+// ─────────────────────────────────────────────────
+// 3D TILT ON PROJECT CARDS (composes with the hover flip)
+// ─────────────────────────────────────────────────
+(function () {
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!canHover || reducedMotion) return;
+
+  document.querySelectorAll('.proj-flip').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      const rx = (y / (r.height / 2)) * -7;
+      const ry = (x / (r.width / 2)) * 7;
+      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
 })();
 

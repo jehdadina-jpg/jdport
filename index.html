@@ -72,6 +72,9 @@
     <div class="boot-skip">press any key to skip</div>
   </div>
 
+  <!-- ═══ SECTION-TO-SECTION AMBIENT COLOR MORPH ═══ -->
+  <div id="ambient-morph" aria-hidden="true"></div>
+
   <!-- ═══ CURSOR GLOW (decorative, desktop only) ═══ -->
   <div id="cursor-glow" aria-hidden="true"></div>
 
@@ -155,30 +158,41 @@
         <span class="icon-box-hint">Click me</span>
         <button id="bike-nav-btn" class="icon-box-btn magnetic-pop" onclick="triggerSakiRide()" type="button"
           aria-label="Summon Saki — Jeh's Kawasaki Ninja 300" title="Saki">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round">
-            <circle cx="5.5" cy="17.5" r="2.5" />
-            <circle cx="18.5" cy="17.5" r="2.5" />
-            <path d="M5.5 17.5h4l2-4h4l2 4h2.5" />
-            <path d="M11.5 13.5l2-3h3" />
-            <path d="M9 8h3" />
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="5" cy="16.5" r="4.3" fill="#101318" stroke="#4ade80" stroke-width="1.5" />
+            <circle cx="19" cy="16.5" r="4.3" fill="#101318" stroke="#4ade80" stroke-width="1.5" />
+            <circle cx="5" cy="16.5" r="1.1" fill="#4ade80" />
+            <circle cx="19" cy="16.5" r="1.1" fill="#4ade80" />
+            <path d="M3.6 12.4h6.2l3-3.6h3.4l2.6 3.8-1.7 1.1-2.1-2.9-3.3 3.2H6.2z" fill="#22c55e" />
+            <path d="M13.4 8.4l3.3-1.5 1.6 1.2" stroke="#e5e7eb" stroke-width="1.3" stroke-linecap="round" />
+            <path d="M8.2 12.4l1.6-2.6" stroke="#166534" stroke-width="1.1" stroke-linecap="round" />
           </svg>
         </button>
         <button id="coffee-nav-btn" class="icon-box-btn magnetic-pop" onclick="openCoffeeReveal()" type="button"
           aria-label="Jeh's coffee order" title="Coffee">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M4 8h13v6a5 5 0 01-5 5H9a5 5 0 01-5-5V8z" />
-            <path d="M17 9h1.5a2.5 2.5 0 010 5H17" />
-            <path d="M7 3c-.5 1 .5 1.5 0 2.5M10.5 3c-.5 1 .5 1.5 0 2.5" />
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M3.5 8.5h13v6a4.5 4.5 0 01-4.5 4.5H8a4.5 4.5 0 01-4.5-4.5z" fill="#f3f4f6" />
+            <path d="M3.5 8.5h13v2.2a30 30 0 01-13 0z" fill="#7c4a2d" />
+            <ellipse cx="10" cy="8.5" rx="6.5" ry="1.7" fill="#a9714b" />
+            <path d="M16.8 10.2h1.4a2.4 2.4 0 010 4.8h-1.4" stroke="#d1d5db" stroke-width="1.5" />
+            <path d="M7 3.2c-.6 1 .6 1.6 0 2.7M10.6 3.2c-.6 1 .6 1.6 0 2.7" stroke="#93a3b8" stroke-width="1.2"
+              stroke-linecap="round" />
           </svg>
         </button>
         <button id="laptop-nav-btn" class="icon-box-btn magnetic-pop" onclick="openLaptopReveal()" type="button"
           aria-label="Jeh's setup" title="Setup">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round">
-            <rect x="4" y="4" width="16" height="10" rx="1" />
-            <path d="M2 18.5h20l-1.5-3H3.5z" />
+          <svg viewBox="0 0 24 24" fill="none">
+            <defs>
+              <linearGradient id="lapScreen" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#4d9fff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <rect x="3.6" y="3.8" width="16.8" height="11" rx="1.3" fill="#374151" />
+            <rect x="5" y="5.1" width="14" height="8.4" rx=".6" fill="url(#lapScreen)" />
+            <path d="M6.4 11.6l2.4-3 1.8 2.2 2-2.7 2.9 3.5z" fill="#0b1120" opacity=".35" />
+            <path d="M1.8 17.4h20.4l-1.5 2.8H3.3z" fill="#9ca3af" />
+            <path d="M9.6 18.4h4.8" stroke="#4b5563" stroke-width="1.1" stroke-linecap="round" />
           </svg>
         </button>
       </div>
@@ -259,7 +273,7 @@
         <div class="card-glow"></div>
         <figure class="tilted-card-figure fade-up d1" id="tilted-card">
           <div class="tilted-card-inner">
-            <img class="tilted-card-img" src="jehface.png" alt="Portrait of Jeh Dadina" width="260" height="330" />
+            <img class="tilted-card-img" src="jeh.webp" alt="Portrait of Jeh Dadina" width="260" height="330" />
           </div>
           <figcaption class="tilted-card-caption">Jeh Dadina</figcaption>
         </figure>
@@ -615,6 +629,9 @@
         <span class="footer-item">📍 19.0595° N, 72.8290° E</span> <span class="footer-dot">·</span>
         <span class="footer-item">🕒 <span id="mumbai-time">--:-- --</span></span>
       </div>
+    </div>
+    <div class="mumbai-skyline" aria-hidden="true">
+      <img src="mumbai.png" alt="" />
     </div>
   </section>
 
