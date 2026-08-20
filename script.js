@@ -113,6 +113,9 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeCmdk();
     closeShortcuts();
+    closeSakiReveal();
+    closeCoffeeReveal();
+    closeLaptopReveal();
   }
 }, { passive: false });
 
@@ -998,7 +1001,7 @@ function closeMobileMenu() {
   if (h >= 5 && h < 12) msg = '🌅 Good morning';
   else if (h >= 12 && h < 17) msg = '☀️ Good afternoon';
   else if (h >= 17 && h < 21) msg = '🌆 Good evening';
-  el.textContent = msg + ' — probably shipping something';
+  el.textContent = msg;
 })();
 
 // ═══════════════════════════════════════════════════
@@ -1195,6 +1198,90 @@ function closeShortcuts() {
     }
     startY = null;
   }, { passive: true });
+})();
+
+// ═══════════════════════════════════════════════════
+// SAKI — Jeh's Kawasaki Ninja 300 (nav-triggered cameo)
+// ═══════════════════════════════════════════════════
+function triggerSakiRide() {
+  const wrap = document.getElementById('saki-bike-wrap');
+  if (!wrap) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    openSakiReveal();
+    return;
+  }
+  if (wrap.classList.contains('riding')) return;
+  wrap.classList.add('riding');
+  wrap.addEventListener('animationend', () => wrap.classList.remove('riding'), { once: true });
+}
+
+function openSakiReveal() {
+  const overlay = document.getElementById('saki-overlay');
+  const lines = document.getElementById('saki-lines');
+  if (!overlay || !lines) return;
+  lines.innerHTML = '';
+  overlay.classList.add('open');
+
+  const script = [
+    { text: '> IDENTIFIED: Jeh\'s Kawasaki Ninja 300', delay: 0 },
+    { text: '> ALIAS: "Saki"', delay: 500, ok: true },
+  ];
+  script.forEach(line => {
+    setTimeout(() => {
+      const div = document.createElement('div');
+      div.className = 'boot-line' + (line.ok ? ' ok' : '');
+      div.textContent = line.text;
+      lines.appendChild(div);
+    }, line.delay);
+  });
+}
+
+function closeSakiReveal() {
+  const overlay = document.getElementById('saki-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+(function () {
+  const bikeImg = document.getElementById('saki-bike-img');
+  const overlay = document.getElementById('saki-overlay');
+  if (bikeImg) bikeImg.addEventListener('click', (e) => { e.stopPropagation(); openSakiReveal(); });
+  if (overlay) overlay.addEventListener('click', closeSakiReveal);
+})();
+
+// ═══════════════════════════════════════════════════
+// COFFEE (nav-triggered cameo, no ride phase)
+// ═══════════════════════════════════════════════════
+function openCoffeeReveal() {
+  const overlay = document.getElementById('coffee-overlay');
+  if (overlay) overlay.classList.add('open');
+}
+
+function closeCoffeeReveal() {
+  const overlay = document.getElementById('coffee-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+(function () {
+  const overlay = document.getElementById('coffee-overlay');
+  if (overlay) overlay.addEventListener('click', closeCoffeeReveal);
+})();
+
+// ═══════════════════════════════════════════════════
+// LAPTOP / SETUP (nav-triggered cameo, no ride phase)
+// ═══════════════════════════════════════════════════
+function openLaptopReveal() {
+  const overlay = document.getElementById('laptop-overlay');
+  if (overlay) overlay.classList.add('open');
+}
+
+function closeLaptopReveal() {
+  const overlay = document.getElementById('laptop-overlay');
+  if (overlay) overlay.classList.remove('open');
+}
+
+(function () {
+  const overlay = document.getElementById('laptop-overlay');
+  if (overlay) overlay.addEventListener('click', closeLaptopReveal);
 })();
 
 // ═══════════════════════════════════════════════════

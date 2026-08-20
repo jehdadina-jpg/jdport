@@ -122,9 +122,42 @@
     </div>
   </div>
 
+  <!-- ═══ SAKI — Jeh's Kawasaki Ninja 300 ═══ -->
+  <div id="saki-bike-wrap" aria-hidden="true">
+    <img id="saki-bike-img" src="saki.png" alt="Ride across the screen — click me" />
+  </div>
+  <div id="saki-overlay" class="konami-overlay" aria-hidden="true">
+    <div class="saki-reveal">
+      <img src="saki.png" alt="Jeh's Kawasaki Ninja 300, nicknamed Saki" />
+      <div class="saki-lines" id="saki-lines"></div>
+    </div>
+  </div>
+
+  <!-- ═══ COFFEE ═══ -->
+  <div id="coffee-overlay" class="konami-overlay" aria-hidden="true">
+    <div class="coffee-reveal">
+      <img src="coffee.png" alt="Jeh's coffee order" />
+    </div>
+  </div>
+
+  <!-- ═══ LAPTOP / SETUP ═══ -->
+  <div id="laptop-overlay" class="konami-overlay" aria-hidden="true">
+    <div class="coffee-reveal">
+      <img src="laptop.png" alt="Jeh's setup" />
+    </div>
+  </div>
+
   <!-- ═══ STICKY FLOATING NAVBAR (Feature 10) ═══ -->
   <nav id="top-nav">
-    <div class="nav-brand">JD</div>
+    <div class="nav-brand-group">
+      <div class="nav-brand">JD</div>
+      <button id="bike-nav-btn" class="bike-nav-btn magnetic" onclick="triggerSakiRide()" type="button"
+        aria-label="Summon Saki — Jeh's Kawasaki Ninja 300" title="Saki 🏍️">🏍️</button>
+      <button id="coffee-nav-btn" class="bike-nav-btn magnetic" onclick="openCoffeeReveal()" type="button"
+        aria-label="Jeh's coffee order" title="Coffee ☕">☕</button>
+      <button id="laptop-nav-btn" class="bike-nav-btn magnetic" onclick="openLaptopReveal()" type="button"
+        aria-label="Jeh's setup" title="Setup 💻">💻</button>
+    </div>
     <div class="nav-section-name" id="nav-section-name">Home</div>
     <div class="nav-links-bar">
       <a onclick="goTo(0)">Home</a>
@@ -273,7 +306,8 @@
         <div class="tl-item tl-left">
           <div class="tl-dot"></div>
           <div class="glow-card tl-card">
-            <div class="card-org">Finance & Technology Club · KJSSE</div>
+            <div class="card-org"><a href="https://swdc.somaiya.edu/p/ftc" target="_blank" class="card-org-link">Finance
+                & Technology Club · KJSSE</a></div>
             <div class="card-role">Founder / FinTech Head</div>
             <div class="card-dur">Jan 2025 – Present</div>
             <ul class="card-body">
@@ -382,75 +416,18 @@
         <div class="proj-flip">
           <div class="proj-flip-inner">
             <div class="proj-front">
-              <div class="proj-emoji">📊</div>
-              <div class="proj-name">FinovateX 2026</div>
+              <div class="proj-emoji">🏛️</div>
+              <div class="proj-name">FTC KJSSE</div>
               <div class="proj-tags">
-                <span class="proj-tag">Python</span>
-                <span class="proj-tag rose">Event</span>
-                <span class="proj-tag gold">Data</span>
+                <span class="proj-tag">Web</span>
+                <span class="proj-tag rose">Club</span>
               </div>
             </div>
             <div class="proj-back">
-              <div class="proj-back-title">FinovateX 2026</div>
-              <p>7-hr FinTech Dual-Event consisting of AlgoTrade Challenge and Fraud Detection using Python.</p>
-              <a href="https://finovate-x.vercel.app/" target="_blank" class="proj-view">View →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">🎓</div>
-              <div class="proj-name">Pointer Aid 2.0</div>
-              <div class="proj-tags">
-                <span class="proj-tag cyan">HTML/CSS/JS</span>
-                <span class="proj-tag gold">Tool</span>
-              </div>
-            </div>
-            <div class="proj-back">
-              <div class="proj-back-title">Pointer Aid 2.0</div>
-              <p>SGPI calculator for KJSSE Sem IV — 11 subjects, 24 credits, animated sliders, lock system, and
-                minimize-marks solver.</p>
-              <a href="https://pointeraidsem4.netlify.app" target="_blank" class="proj-view">View →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">🗣️</div>
-              <div class="proj-name">sahayAK</div>
-              <div class="proj-tags">
-                <span class="proj-tag rose">NLP</span>
-                <span class="proj-tag">Voice</span>
-                <span class="proj-tag cyan">Python</span>
-              </div>
-            </div>
-            <div class="proj-back">
-              <div class="proj-back-title">sahayAK</div>
-              <p>AI-powered multilingual voice assistant for Indian bank branch desks. Pitch script, regional language
-                translation, GTM strategy.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">📈</div>
-              <div class="proj-name">Stock Research Agent</div>
-              <div class="proj-tags">
-                <span class="proj-tag">React</span>
-                <span class="proj-tag rose">Claude API</span>
-                <span class="proj-tag gold">Finance</span>
-              </div>
-            </div>
-            <div class="proj-back">
-              <div class="proj-back-title">Stock Research Agent</div>
-              <p>Bloomberg Terminal-inspired React frontend for a Claude-powered stock research agent with agentic loop
-                and tool use.</p>
+              <div class="proj-back-title">FTC KJSSE</div>
+              <p>Official website for the Finance & Technology Club at KJSSE — the club I founded. Built and
+                maintain it end to end.</p>
+              <a href="https://swdc.somaiya.edu/p/ftc" target="_blank" class="proj-view">View →</a>
             </div>
           </div>
         </div>
@@ -461,15 +438,76 @@
               <div class="proj-emoji">💰</div>
               <div class="proj-name">PayRozgar</div>
               <div class="proj-tags">
-                <span class="proj-tag cyan">React</span>
-                <span class="proj-tag">Node.js</span>
+                <span class="proj-tag cyan">Vanilla JS</span>
+                <span class="proj-tag">PWA</span>
                 <span class="proj-tag rose">FinTech</span>
               </div>
             </div>
             <div class="proj-back">
               <div class="proj-back-title">PayRozgar</div>
-              <p>One-tap salary and attendance tracker with automated wage-advance ledgers and instant salary slip
-                generation for small-scale Indian retail shops.</p>
+              <p>Offline-first payroll & attendance PWA for small shops — vanilla JS state engine, service-worker
+                caching, and auto-generated digital payslips. Built under FTC KJSSE.</p>
+              <a href="https://github.com/FTC-KJSSE/payrozgar" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">💹</div>
+              <div class="proj-name">MFScope</div>
+              <div class="proj-tags">
+                <span class="proj-tag">Python</span>
+                <span class="proj-tag rose">ML</span>
+                <span class="proj-tag gold">Finance</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">MFScope</div>
+              <p>India mutual fund intelligence engine — pulls daily AMFI NAV data, engineers 30+ risk/sentiment
+                features, and scores funds Strong Buy → Strong Sell via a FastAPI + React dashboard.</p>
+              <a href="https://github.com/jehdadina-jpg/MFScope" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">💳</div>
+              <div class="proj-name">SwipeRight</div>
+              <div class="proj-tags">
+                <span class="proj-tag cyan">Next.js</span>
+                <span class="proj-tag rose">ML</span>
+                <span class="proj-tag gold">FinTech</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">SwipeRight</div>
+              <p>AI credit-card recommendation engine — parses bank statements, ML-categorizes spend across 13
+                categories, and returns the one best card from 140+ Indian cards with an AI chat to explain why.</p>
+              <a href="https://github.com/jehdadina-jpg/swiperight" target="_blank" class="proj-view">View →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-flip">
+          <div class="proj-flip-inner">
+            <div class="proj-front">
+              <div class="proj-emoji">🌐</div>
+              <div class="proj-name">FinTrace</div>
+              <div class="proj-tags">
+                <span class="proj-tag">Node.js</span>
+                <span class="proj-tag rose">Real-Time</span>
+                <span class="proj-tag gold">FinTech</span>
+              </div>
+            </div>
+            <div class="proj-back">
+              <div class="proj-back-title">FinTrace</div>
+              <p>Live network-latency globe for financial infrastructure — traceroutes to NSE, NYSE, Binance, and
+                AWS regions, streamed via SSE onto a 3D rotating globe with a Bloomberg-terminal readout.</p>
+              <a href="https://github.com/FTC-KJSSE/fintrace" target="_blank" class="proj-view">View →</a>
             </div>
           </div>
         </div>
