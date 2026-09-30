@@ -4,30 +4,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jeh Dadina — Portfolio</title>
+  <title>Jeh Dadina | FinTech and AI Engineer</title>
   <meta name="description"
-    content="Portfolio of Jeh Dadina — Fintech builder, AI systems thinker, frontend engineer at KJSSE." />
+    content="Portfolio of Jeh Dadina: FinTech builder, ML engineer and frontend engineer at KJSSE, Mumbai." />
+  <script>document.documentElement.classList.add('js');</script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260930g" />
 
-  <meta name="theme-color" content="#060811" />
+  <meta name="theme-color" content="#050505" />
   <link rel="icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23060811'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='800' font-size='28' fill='%234d9fff' text-anchor='middle'%3EJD%3C/text%3E%3C/svg%3E" />
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23050505'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-style='italic' font-size='30' fill='%239BF2CF' text-anchor='middle'%3EJD%3C/text%3E%3C/svg%3E" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Jeh Dadina — Portfolio" />
+  <meta property="og:title" content="Jeh Dadina | FinTech and AI Engineer" />
   <meta property="og:description"
-    content="Portfolio of Jeh Dadina — Fintech builder, AI systems thinker, frontend engineer at KJSSE." />
+    content="Portfolio of Jeh Dadina: FinTech builder, ML engineer and frontend engineer at KJSSE, Mumbai." />
   <meta property="og:image" content="images/jehface.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Jeh Dadina — Portfolio" />
+  <meta name="twitter:title" content="Jeh Dadina | FinTech and AI Engineer" />
   <meta name="twitter:description"
-    content="Portfolio of Jeh Dadina — Fintech builder, AI systems thinker, frontend engineer at KJSSE." />
+    content="Portfolio of Jeh Dadina: FinTech builder, ML engineer and frontend engineer at KJSSE, Mumbai." />
   <meta name="twitter:image" content="images/jehface.png" />
 
   <script type="application/ld+json">
@@ -68,49 +73,58 @@
 
   <!-- ═══ BOOT SEQUENCE ═══ -->
   <div id="boot-screen">
-    <div class="boot-lines" id="boot-lines"></div>
-    <div class="boot-skip">press any key to skip</div>
+    <div class="boot-inner">
+      <div class="boot-lines" id="boot-lines"></div>
+      <div class="boot-bar"><span></span></div>
+      <div class="boot-skip">press any key to skip</div>
+    </div>
   </div>
 
-  <!-- ═══ SECTION-TO-SECTION AMBIENT COLOR MORPH ═══ -->
-  <div id="ambient-morph" aria-hidden="true"></div>
+  <!-- ═══ AMBIENT BACKDROP — one aura per section, crossfaded ═══ -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="aura aura-0 is-on"></div>
+    <div class="aura aura-1"></div>
+    <div class="aura aura-2"></div>
+    <div class="aura aura-3"></div>
+    <div class="aura aura-4"></div>
+    <div class="backdrop-grid"></div>
+  </div>
 
-  <!-- ═══ CURSOR GLOW (decorative, desktop only) ═══ -->
   <div id="cursor-glow" aria-hidden="true"></div>
-
-  <!-- ═══ SCROLL PROGRESS ═══ -->
-  <div id="scroll-progress" aria-hidden="true">
-    <div id="scroll-progress-fill"></div>
-  </div>
+  <div id="scroll-progress" aria-hidden="true"></div>
 
   <!-- ═══ COMMAND PALETTE ═══ -->
   <div id="cmdk-overlay" class="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Command palette">
-    <div class="cmdk-box">
-      <div class="cmdk-input-row">
-        <span class="cmdk-prompt">›</span>
-        <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Jump to a section, open a link, run a command…"
-          autocomplete="off" spellcheck="false" />
-        <kbd class="cmdk-esc">esc</kbd>
+    <div class="bezel cmdk-shell">
+      <div class="core cmdk-box">
+        <div class="cmdk-input-row">
+          <i class="ph-light ph-magnifying-glass" aria-hidden="true"></i>
+          <input type="text" id="cmdk-input" class="cmdk-input"
+            placeholder="Jump to a section, open a link, run a command…" autocomplete="off" spellcheck="false" />
+          <kbd class="kbd">esc</kbd>
+        </div>
+        <div class="cmdk-list" id="cmdk-list" data-lenis-prevent></div>
       </div>
-      <div class="cmdk-list" id="cmdk-list"></div>
     </div>
   </div>
 
   <!-- ═══ KEYBOARD SHORTCUTS ═══ -->
   <div id="shortcuts-overlay" class="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
-    <div class="cmdk-box shortcuts-box">
-      <div class="shortcuts-title">Keyboard Shortcuts</div>
-      <div class="shortcuts-grid">
-        <div class="shortcuts-keys"><kbd>↑</kbd><kbd>↓</kbd></div>
-        <div>Move between sections</div>
-        <div class="shortcuts-keys"><kbd>1</kbd>–<kbd>5</kbd></div>
-        <div>Jump straight to a section</div>
-        <div class="shortcuts-keys"><kbd>Ctrl</kbd>+<kbd>K</kbd></div>
-        <div>Open command palette</div>
-        <div class="shortcuts-keys"><kbd>?</kbd></div>
-        <div>Toggle this panel</div>
-        <div class="shortcuts-keys"><kbd>Esc</kbd></div>
-        <div>Close any overlay</div>
+    <div class="bezel cmdk-shell shortcuts-shell">
+      <div class="core shortcuts-box">
+        <div class="shortcuts-title">Keyboard shortcuts</div>
+        <div class="shortcuts-grid">
+          <div class="shortcuts-keys"><kbd class="kbd">J</kbd><kbd class="kbd">K</kbd></div>
+          <div>Next / previous section</div>
+          <div class="shortcuts-keys"><kbd class="kbd">1</kbd>-<kbd class="kbd">5</kbd></div>
+          <div>Jump straight to a section</div>
+          <div class="shortcuts-keys"><kbd class="kbd">Ctrl</kbd><kbd class="kbd">K</kbd></div>
+          <div>Open command palette</div>
+          <div class="shortcuts-keys"><kbd class="kbd">?</kbd></div>
+          <div>Toggle this panel</div>
+          <div class="shortcuts-keys"><kbd class="kbd">Esc</kbd></div>
+          <div>Close any overlay</div>
+        </div>
       </div>
     </div>
   </div>
@@ -118,495 +132,504 @@
   <!-- ═══ TOAST ═══ -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+  <!-- ═══ PAGE VEIL — brief cross-fade flash on nav-triggered section jumps ═══ -->
+  <div id="page-veil" aria-hidden="true"></div>
+
   <!-- ═══ EASTER EGG ═══ -->
   <div id="konami-overlay" class="konami-overlay" aria-hidden="true">
     <canvas id="konami-canvas"></canvas>
-    <div class="konami-msg">🥚 You found the easter egg.<br /><span>Achievement unlocked: Curious Developer</span>
-    </div>
+    <div class="konami-msg">You found the easter egg.<span>Achievement unlocked · Curious Developer</span></div>
   </div>
 
   <!-- ═══ SAKI — Jeh's Kawasaki Ninja 300 ═══ -->
   <div id="saki-bike-wrap" aria-hidden="true">
-    <img id="saki-bike-img" src="images/saki.png" alt="Ride across the screen — click me" />
+    <img id="saki-bike-img" src="images/saki.png" alt="Saki riding across the screen. Click her." />
   </div>
   <div id="saki-overlay" class="konami-overlay" aria-hidden="true">
-    <div class="saki-reveal">
-      <img src="images/saki.png" alt="Jeh's Kawasaki Ninja 300, nicknamed Saki" />
+    <div class="reveal-card saki-reveal">
+      <div class="bezel"><div class="core media-core"><img src="images/saki.png" alt="Jeh's Kawasaki Ninja 300, nicknamed Saki" /></div></div>
       <div class="saki-lines" id="saki-lines"></div>
     </div>
   </div>
 
-  <!-- ═══ COFFEE ═══ -->
-  <div id="coffee-overlay" class="konami-overlay" aria-hidden="true">
-    <div class="coffee-reveal">
-      <img src="images/coffee.png" alt="Jeh's coffee order" />
-    </div>
-  </div>
+  <!-- ═══ FLUID ISLAND NAV ═══ -->
+  <header class="nav-wrap">
+    <nav id="top-nav" aria-label="Primary">
+      <button class="nav-brand" type="button" onclick="goTo(0)" aria-label="Back to top">
+        <span class="nav-brand-mark">JD</span>
+      </button>
 
-  <!-- ═══ LAPTOP / SETUP ═══ -->
-  <div id="laptop-overlay" class="konami-overlay" aria-hidden="true">
-    <div class="coffee-reveal">
-      <img src="images/laptop.png" alt="Jeh's setup" />
-    </div>
-  </div>
+      <span class="nav-sep" aria-hidden="true"></span>
 
-  <!-- ═══ STICKY FLOATING NAVBAR (Feature 10) ═══ -->
-  <nav id="top-nav">
-    <div class="nav-brand-group">
-      <div class="nav-brand">JD</div>
       <div class="icon-box">
-        <span class="icon-box-hint">Click me</span>
+        <span class="icon-box-hint">click me</span>
         <button id="bike-nav-btn" class="icon-box-btn magnetic-pop" onclick="triggerSakiRide()" type="button"
-          aria-label="Summon Saki — Jeh's Kawasaki Ninja 300" title="click me!">
+          aria-label="Summon Saki, Jeh's Kawasaki Ninja 300" title="click me!">
           <img src="images/bikesymbol.png" alt="" class="icon-box-img" />
         </button>
-        <button id="coffee-nav-btn" class="icon-box-btn magnetic-pop" onclick="openCoffeeReveal()" type="button"
-          aria-label="Jeh's coffee order" title="click me!">
-          <img src="images/coffeesymbol.png" alt="" class="icon-box-img" />
-        </button>
-        <button id="laptop-nav-btn" class="icon-box-btn magnetic-pop" onclick="openLaptopReveal()" type="button"
-          aria-label="Jeh's setup" title="click me!">
-          <img src="images/laptopsymbol.png" alt="" class="icon-box-img" />
-        </button>
       </div>
-    </div>
-    <div class="nav-section-name" id="nav-section-name">Home</div>
-    <div class="nav-links-bar">
-      <a onclick="goTo(0)">Home</a>
-      <a onclick="goTo(1)">Experience</a>
-      <a onclick="goTo(2)">Skills</a>
-      <a onclick="goTo(3)">Projects</a>
-      <a onclick="goTo(4)">Contact</a>
-      <button class="cmdk-trigger magnetic" onclick="openCmdk()" aria-label="Open command palette" type="button">
-        <span class="cmdk-key">⌘</span>K
+
+      <span class="nav-sep hide-sm" aria-hidden="true"></span>
+
+      <div class="nav-links-bar">
+        <span class="nav-indicator" aria-hidden="true"></span>
+        <a href="#home" onclick="event.preventDefault(); goTo(0)">Home</a>
+        <a href="#experience" onclick="event.preventDefault(); goTo(1)">Experience</a>
+        <a href="#skills" onclick="event.preventDefault(); goTo(2)">Stack</a>
+        <a href="#projects" onclick="event.preventDefault(); goTo(3)">Work</a>
+        <a href="#contact" onclick="event.preventDefault(); goTo(4)">Contact</a>
+      </div>
+
+      <button class="cmdk-trigger" onclick="openCmdk()" aria-label="Open command palette" type="button">
+        <span>⌘</span>K
       </button>
-    </div>
-    <!-- Hamburger Icon for Mobile -->
-    <div class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" role="button" tabindex="0"
-      aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu-overlay"
-      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleMobileMenu();}">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </nav>
+
+      <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" type="button"
+        aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu-overlay">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
 
   <!-- MOBILE OVERLAY MENU -->
   <div class="mobile-menu-overlay" id="mobile-menu-overlay">
     <div class="mobile-menu-links">
-      <a onclick="closeMobileMenu(); goTo(0)">Home</a>
-      <a onclick="closeMobileMenu(); goTo(1)">Experience</a>
-      <a onclick="closeMobileMenu(); goTo(2)">Skills</a>
-      <a onclick="closeMobileMenu(); goTo(3)">Projects</a>
-      <a onclick="closeMobileMenu(); goTo(4)">Contact</a>
+      <a style="--i:0" onclick="closeMobileMenu(); goTo(0)">Home</a>
+      <a style="--i:1" onclick="closeMobileMenu(); goTo(1)">Experience</a>
+      <a style="--i:2" onclick="closeMobileMenu(); goTo(2)">Stack</a>
+      <a style="--i:3" onclick="closeMobileMenu(); goTo(3)">Work</a>
+      <a style="--i:4" onclick="closeMobileMenu(); goTo(4)">Contact</a>
+    </div>
+    <div class="mobile-menu-foot" style="--i:5">
+      <a href="mailto:jehdadina@gmail.com">jehdadina@gmail.com</a>
+      <span>Mumbai, IN</span>
     </div>
   </div>
 
-  <!-- NAV DOTS -->
+  <!-- SECTION RAIL -->
   <div id="nav-dots" role="tablist" aria-label="Section navigation">
-    <div class="dot active" data-page="1" onclick="goTo(0)" role="tab" aria-selected="true" tabindex="0"
-      aria-label="Go to Home" onkeydown="if(event.key==='Enter'){goTo(0)}"></div>
-    <div class="dot" data-page="2" onclick="goTo(1)" role="tab" aria-selected="false" tabindex="0"
-      aria-label="Go to Experience" onkeydown="if(event.key==='Enter'){goTo(1)}"></div>
-    <div class="dot" data-page="3" onclick="goTo(2)" role="tab" aria-selected="false" tabindex="0"
-      aria-label="Go to Skills" onkeydown="if(event.key==='Enter'){goTo(2)}"></div>
-    <div class="dot" data-page="4" onclick="goTo(3)" role="tab" aria-selected="false" tabindex="0"
-      aria-label="Go to Projects" onkeydown="if(event.key==='Enter'){goTo(3)}"></div>
-    <div class="dot" data-page="5" onclick="goTo(4)" role="tab" aria-selected="false" tabindex="0"
-      aria-label="Go to Contact" onkeydown="if(event.key==='Enter'){goTo(4)}"></div>
+    <div class="dot active" onclick="goTo(0)" role="tab" aria-selected="true" tabindex="0" aria-label="Go to Home"
+      onkeydown="if(event.key==='Enter'){goTo(0)}"><span>Home</span></div>
+    <div class="dot" onclick="goTo(1)" role="tab" aria-selected="false" tabindex="0" aria-label="Go to Experience"
+      onkeydown="if(event.key==='Enter'){goTo(1)}"><span>Experience</span></div>
+    <div class="dot" onclick="goTo(2)" role="tab" aria-selected="false" tabindex="0" aria-label="Go to Stack"
+      onkeydown="if(event.key==='Enter'){goTo(2)}"><span>Stack</span></div>
+    <div class="dot" onclick="goTo(3)" role="tab" aria-selected="false" tabindex="0" aria-label="Go to Work"
+      onkeydown="if(event.key==='Enter'){goTo(3)}"><span>Work</span></div>
+    <div class="dot" onclick="goTo(4)" role="tab" aria-selected="false" tabindex="0" aria-label="Go to Contact"
+      onkeydown="if(event.key==='Enter'){goTo(4)}"><span>Contact</span></div>
   </div>
 
   <!-- UP/DOWN NAVIGATION -->
   <div class="nav-controls">
     <button id="nav-shortcuts-btn" title="Keyboard shortcuts (?)" aria-label="Show keyboard shortcuts"
-      onclick="toggleShortcuts()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2 1.7-2 3.3" stroke-linecap="round" />
-        <circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none" />
-      </svg>
+      onclick="toggleShortcuts()" type="button">
+      <i class="ph-light ph-question" aria-hidden="true"></i>
     </button>
-    <button id="nav-up" title="Previous Page" aria-label="Previous page" onclick="goUp()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M18 15l-6-6-6 6" />
-      </svg>
+    <button id="nav-up" title="Previous section" aria-label="Previous section" onclick="goUp()" type="button">
+      <i class="ph-light ph-caret-up" aria-hidden="true"></i>
     </button>
-    <button id="nav-down" title="Next Page" aria-label="Next page" onclick="goDown()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M6 9l6 6 6-6" />
-      </svg>
+    <button id="nav-down" title="Next section" aria-label="Next section" onclick="goDown()" type="button">
+      <i class="ph-light ph-caret-down" aria-hidden="true"></i>
     </button>
   </div>
 
-  <!-- ══ PAGE 1 — HERO ══ -->
-  <section class="section" id="page1">
-    <canvas id="particles-canvas"></canvas>
-    <div class="hero-layout">
-      <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:1.5rem;">
-        <div class="card-glow"></div>
-        <figure class="tilted-card-figure fade-up d1" id="tilted-card">
-          <div class="tilted-card-inner">
-            <img class="tilted-card-img" src="images/jeh.webp" alt="Portrait of Jeh Dadina" width="220" height="280" />
-          </div>
-          <figcaption class="tilted-card-caption">Jeh Dadina</figcaption>
-        </figure>
+  <main>
 
-      </div>
+    <!-- ══ HERO — pinned intro: the camera flies into the CRT ══ -->
+    <section class="section hero" id="page1">
+      <div class="hero-stage">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-glow-2" aria-hidden="true"></div>
 
-      <div class="hero-right">
-        <div class="hero-tag fade-up" id="greeting-tag"></div>
-        <!-- Feature 1: BlurText hero name -->
-        <h1 class="hero-name fade-up d2" id="hero-name-el">
-          <span class="blur-line" data-text="Jeh"></span><br />
-          <span class="blur-line gradient" data-text="Dadina"></span>
-        </h1>
-        <!-- Feature 4: Typewriter subtitle -->
-        <p class="hero-sub fade-up d3" id="typewriter-el"></p>
+        <ul class="hero-roles" aria-label="Roles">
+          <li>FinTech builder</li>
+          <li>ML engineer</li>
+          <li>Frontend engineer</li>
+          <li>Founder, FTC KJSSE</li>
+        </ul>
 
-        <!-- Social SVGs -->
-        <div class="hero-socials fade-up d4" style="display:flex; gap:0.9rem; flex-wrap:wrap;">
-          <a class="hero-social-link magnetic" href="https://github.com/jehdadina-jpg" target="_blank" title="GitHub"
-            aria-label="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-            </svg>
-          </a>
-          <a class="hero-social-link magnetic" href="https://www.codechef.com/users/jehdadina/" target="_blank" title="CodeChef"
-            aria-label="CodeChef">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon
-                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-            </svg>
-          </a>
-          <a class="hero-social-link magnetic" href="https://www.linkedin.com/in/jehdadina/" target="_blank" title="LinkedIn"
-            aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
-          </a>
-          <a class="hero-social-link magnetic" href="https://www.instagram.com/jehdadina/" target="_blank" title="Instagram"
-            aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
-          <a class="hero-social-link magnetic" href="mailto:jehdadina@gmail.com" title="Email" aria-label="Email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1 class="hero-name">
+              <span class="sr-only">Jeh Dadina, computer engineer and builder. </span>
+              <span class="mask-line" aria-hidden="true"><span class="chars" data-text="I build machines"></span></span>
+              <span class="mask-line" aria-hidden="true"><span class="chars" data-text="that"></span><em class="chars" data-text="think."></em></span>
+            </h1>
 
-  <!-- ══ PAGE 2 — EXPERIENCE (Feature 6: Timeline) ══ -->
-  <section class="section" id="page2">
-    <canvas id="galaxy-canvas"></canvas>
-    <div class="timeline-content">
-      <div class="section-title" data-scramble="Experience & Education">Experience & Education</div>
+            <p class="hero-lede reveal" style="--d:2">
+              Computer engineer who ships first and explains later. Full-stack, ML, systems, whatever the problem needs. Based in Mumbai.
+            </p>
 
-      <div class="timeline">
-        <div class="timeline-line"></div>
-        <div class="timeline-pulse"></div>
-
-        <div class="tl-item tl-left">
-          <div class="tl-dot tl-dot-blue"></div>
-          <div class="glow-card tl-card tl-card-blue">
-            <div class="card-org"><a href="https://swdc.somaiya.edu/p/ftc" target="_blank" class="card-org-link">Finance
-                & Technology Club · KJSSE</a></div>
-            <div class="card-role">Founder / FinTech Head</div>
-            <div class="card-dur">Jan 2025 – <span class="live-badge"><span class="live-dot"></span>Present</span>
+            <div class="hero-ctas reveal" style="--d:3">
+              <button class="btn btn-primary magnetic" type="button" onclick="goTo(3)">
+                <span>See the work</span>
+                <span class="btn-ico"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              </button>
+              <button class="btn btn-ghost magnetic" type="button" onclick="goTo(4)">
+                <span>Contact</span>
+                <span class="btn-ico"><i class="ph-light ph-arrow-right" aria-hidden="true"></i></span>
+              </button>
             </div>
-            <ul class="card-body">
-              <li>Organized FinovateX 2026 — A 7-hour dual event consisting of AlgoTrading and Fraud Detection</li>
-              <li>Authored fintech & finance research papers and book chapters</li>
-            </ul>
           </div>
-        </div>
 
-        <div class="tl-item tl-right">
-          <div class="tl-dot tl-dot-rose"></div>
-          <div class="glow-card tl-card tl-card-rose">
-            <div class="card-org">Rayze Technologies</div>
-            <div class="card-role">Intern — Founders Office</div>
-            <div class="card-dur">Mar 2025 – <span class="live-badge"><span class="live-dot"></span>Present</span>
+          <div class="crt-zoom">
+        <div class="crt-stage reveal" style="--d:2">
+          <div class="crt">
+            <div class="crt-screen" id="crt-screen" role="button" tabindex="0" aria-label="Television showing an ASCII portrait of Jeh. Press to change channel.">
+              <canvas id="crt-canvas"></canvas>
+              <span class="crt-rgb-fx" aria-hidden="true"></span>
+              <div class="crt-osd">
+                <span><b id="crt-ch">CH 01</b> <span id="crt-label">JEH.DADINA</span></span>
+                <span id="greeting-tag">Hello</span>
+              </div>
+              <div class="crt-osd crt-osd-bottom"><span class="hero-type-prompt">~/jeh $</span> <span id="typewriter-el"></span></div>
             </div>
-            <ul class="card-body">
-              <li>Supporting founders on Stackbase</li>
-              <li>Contributing to product roadmap for mid-tier financial institutions</li>
-            </ul>
+            <div class="crt-panel">
+              <span class="crt-brand">JD·TERM</span>
+              <button class="crt-knob hint" id="crt-knob" type="button" aria-label="Next channel" title="Change channel"><i></i></button>
+              <span class="crt-knob crt-knob-sm" aria-hidden="true"><i></i></span>
+              <span class="crt-pips" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+              <span class="crt-grille" aria-hidden="true"></span>
+              <span class="crt-led" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="desk" aria-hidden="true"></div>
+        </div>
           </div>
         </div>
 
-        <div class="tl-item tl-left">
-          <div class="tl-dot tl-dot-gold"></div>
-          <div class="glow-card tl-card tl-card-gold">
-            <div class="card-org">TÜV Rheinland India</div>
-            <div class="card-role">Intern — Industrial Services & Cyber Security</div>
-            <div class="card-dur">Aug – Dec 2024</div>
-            <ul class="card-body">
-              <li>Conducted market analysis & competitive research</li>
-              <li>Provided insights supporting strategic decisions</li>
-            </ul>
-          </div>
-        </div>
+        <div class="zoom-black" aria-hidden="true"></div>
       </div>
+    </section>
 
-      <div class="edu-row">
-        <div class="edu-mini">
-          <div class="edu-inst">KJ Somaiya School of Engineering</div>
-          <div class="edu-deg">B.Tech COMPS · Sem V</div>
-          <div class="edu-score">SGPA 9.04</div>
-          <div class="edu-bar">
-            <div class="edu-bar-fill" style="width:90.4%"></div>
-          </div>
-        </div>
-        <div class="edu-mini">
-          <div class="edu-inst">Arya Gurukul Jr College</div>
-          <div class="edu-deg">Computer Science HSC</div>
-          <div class="edu-score">78.83%</div>
-          <div class="edu-bar">
-            <div class="edu-bar-fill" style="width:78.83%"></div>
-          </div>
-        </div>
-        <div class="edu-mini">
-          <div class="edu-inst">CP Goenka International</div>
-          <div class="edu-deg">Science CISCE</div>
-          <div class="edu-score">93.5%</div>
-          <div class="edu-bar">
-            <div class="edu-bar-fill" style="width:93.5%"></div>
-          </div>
+    <!-- ══ STATEMENT — where the zoom lands; letters fade in, Saki knocks them over ══ -->
+    <div class="statement" aria-label="About Jeh">
+      <div class="container">
+        <h2 class="stmt" aria-label="Roots in finance, but in love with machines.">
+          <span class="stmt-line l1" aria-hidden="true">Roots in</span>
+          <span class="stmt-line l2 knock" aria-hidden="true" title="Send Saki again">Finance,<img class="stmt-bike" src="images/saki.png" alt="" /></span>
+          <span class="stmt-line l3" aria-hidden="true">but in love</span>
+          <span class="stmt-line l4" aria-hidden="true">with <em>machines.</em></span>
+        </h2>
+
+        <div class="stmt-foot">
+          <p class="stmt-note">That was Saki, my Kawasaki Ninja 300.<br />Tap the word to send her through again.</p>
+          <p class="scrub-text">
+            I train models on market data: terminals that flag anomalies before the tape does, fund engines that
+            score NAV history like sentiment, and credit ML that reads a bank statement better than a banker.
+            Off the keyboard it's <span class="ink-pill" onclick="triggerSakiRide()"><img src="images/bikesymbol.png" alt="" /></span> Saki
+            and one more side project.
+          </p>
         </div>
       </div>
     </div>
-    <div class="timeline-scroll-cue" id="timeline-scroll-cue">
-      <span>more below</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M6 9l6 6 6-6" />
-      </svg>
-    </div>
-  </section>
 
-  <!-- ══ PAGE 3 — TECH STACK ══ -->
-  <section class="section" id="page3">
-    <canvas id="glitch-canvas"></canvas>
-    <div class="tech-content">
-      <div class="section-title" data-scramble="Tech Stack">Tech Stack</div>
-
-      <div class="tech-wrapper">
-        <div class="tech-category">
-          <div class="cat-label">Frontend</div>
-          <div class="tech-grid" id="tech-frontend"></div>
-        </div>
-        <div class="tech-category">
-          <div class="cat-label">Backend & AI</div>
-          <div class="tech-grid" id="tech-backend"></div>
-        </div>
-        <div class="tech-category">
-          <div class="cat-label">Data & Design</div>
-          <div class="tech-grid" id="tech-data"></div>
-        </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Anomaly Detection</span><i>✦</i><span>Algorithmic Trading</span><i>✦</i><span>Credit Risk ML</span><i>✦</i><span>Fraud Detection</span><i>✦</i><span>Fund Intelligence</span><i>✦</i><span>Latency Telemetry</span><i>✦</i>
+        <span>Anomaly Detection</span><i>✦</i><span>Algorithmic Trading</span><i>✦</i><span>Credit Risk ML</span><i>✦</i><span>Fraud Detection</span><i>✦</i><span>Fund Intelligence</span><i>✦</i><span>Latency Telemetry</span><i>✦</i>
       </div>
     </div>
-  </section>
 
-  <!-- ══ PAGE 4 — PROJECTS (Feature 2: Spotlight + Feature 8: Flip Cards) ══ -->
-  <section class="section" id="page4">
-    <div class="page4-bg"></div>
-    <div class="spotlight-overlay" id="spotlight-overlay"></div>
-    <div class="projects-content">
-      <div class="projects-grid">
+    <!-- ══ EXPERIENCE — pinned heading ══ -->
+    <section class="section" id="page2">
+      <div class="container split">
+        <header class="section-head sticky-head">
+          <h2 class="display split-words">Where I've been <em>building.</em></h2>
+          <p class="section-lede reveal" style="--d:2">Founding a fintech club, sitting in a founders' office, and learning the
+            industrial side of cyber security.</p>
+        </header>
 
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">📡</div>
-              <div class="proj-name">Anomaly Terminal</div>
-              <div class="proj-tags">
-                <span class="proj-tag">Open Source</span>
-                <span class="proj-tag gold">ML</span>
-                <span class="proj-tag rose">Finance</span>
+        <div class="tl">
+          <div class="tl-track">
+          <span class="tl-line" aria-hidden="true"><i></i></span>
+
+          <article class="tl-item reveal">
+            <span class="tl-node is-live" aria-hidden="true"></span>
+            <div class="bezel spot">
+              <div class="core tl-core">
+                <div class="tl-top">
+                  <a href="https://swdc.somaiya.edu/p/ftc" target="_blank" rel="noopener" class="tl-org link-line">Finance &amp; Technology Club · KJSSE</a>
+                  <span class="status"><span class="live-dot"></span>Present</span>
+                </div>
+                <h3 class="tl-role">Founder / FinTech Head</h3>
+                <div class="tl-dur">Jan 2025 - Now</div>
+                <ul class="tl-body">
+                  <li>Organized FinovateX 2026: a 7-hour dual event of AlgoTrading and Fraud Detection</li>
+                  <li>Authored fintech &amp; finance research papers and book chapters</li>
+                </ul>
               </div>
             </div>
-            <div class="proj-back">
-              <div class="proj-back-title">Anomaly Terminal</div>
-              <p>Bloomberg-inspired stock market analysis platform combining technical analysis with ML to detect unusual market behavior and generate AI-powered Buy, Hold, and Sell recommendations.</p>
-              <a href="https://github.com/jehdadina-jpg/anomaly" target="_blank" class="proj-view">View →</a>
-            </div>
-          </div>
-        </div>
+          </article>
 
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">🏛️</div>
-              <div class="proj-name">FTC KJSSE</div>
-              <div class="proj-tags">
-                <span class="proj-tag">Web</span>
-                <span class="proj-tag gold">Club</span>
+          <article class="tl-item reveal">
+            <span class="tl-node is-live" aria-hidden="true"></span>
+            <div class="bezel spot">
+              <div class="core tl-core">
+                <div class="tl-top">
+                  <span class="tl-org">Rayze Technologies</span>
+                  <span class="status"><span class="live-dot"></span>Present</span>
+                </div>
+                <h3 class="tl-role">Intern, Founders Office</h3>
+                <div class="tl-dur">Mar 2025 - Now</div>
+                <ul class="tl-body">
+                  <li>Supporting founders on Stackbase</li>
+                  <li>Contributing to product roadmap for mid-tier financial institutions</li>
+                </ul>
               </div>
             </div>
-            <div class="proj-back">
-              <div class="proj-back-title">FTC KJSSE</div>
-              <p>Official website for the Finance & Technology Club at KJSSE — the club I founded. Built and
-                maintain it end to end.</p>
-              <a href="https://swdc.somaiya.edu/p/ftc" target="_blank" class="proj-view">View →</a>
-            </div>
-          </div>
-        </div>
+          </article>
 
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">💰</div>
-              <div class="proj-name">PayRozgar</div>
-              <div class="proj-tags">
-                <span class="proj-tag cyan">Vanilla JS</span>
-                <span class="proj-tag rose">PWA</span>
-                <span class="proj-tag">FinTech</span>
+          <article class="tl-item reveal">
+            <span class="tl-node" aria-hidden="true"></span>
+            <div class="bezel spot">
+              <div class="core tl-core">
+                <div class="tl-top">
+                  <span class="tl-org">TÜV Rheinland India</span>
+                  <span class="status status-muted">Completed</span>
+                </div>
+                <h3 class="tl-role">Intern, Industrial Services &amp; Cyber Security</h3>
+                <div class="tl-dur">Aug - Dec 2024</div>
+                <ul class="tl-body">
+                  <li>Conducted market analysis &amp; competitive research</li>
+                  <li>Provided insights supporting strategic decisions</li>
+                </ul>
               </div>
             </div>
-            <div class="proj-back">
-              <div class="proj-back-title">PayRozgar</div>
-              <p>Offline-first payroll & attendance PWA for small shops — vanilla JS state engine, service-worker
-                caching, and auto-generated digital payslips. Built under FTC KJSSE.</p>
-              <a href="https://github.com/FTC-KJSSE/payrozgar" target="_blank" class="proj-view">View →</a>
-            </div>
+          </article>
           </div>
-        </div>
 
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">💹</div>
-              <div class="proj-name">MFScope</div>
-              <div class="proj-tags">
-                <span class="proj-tag">Python</span>
-                <span class="proj-tag cyan">ML</span>
-                <span class="proj-tag gold">Finance</span>
+          <div class="edu-grid">
+            <div class="bezel edu-card reveal">
+              <div class="core edu-core">
+                <div class="edu-score"><span data-count="9.04" data-decimals="2">0.00</span><small>SGPA</small></div>
+                <div class="edu-bar"><span style="--w:.904"></span></div>
+                <div class="edu-inst">KJ Somaiya School of Engineering</div>
+                <div class="edu-deg">B.Tech COMPS · Sem V</div>
               </div>
             </div>
-            <div class="proj-back">
-              <div class="proj-back-title">MFScope</div>
-              <p>India mutual fund intelligence engine — pulls daily AMFI NAV data, engineers 30+ risk/sentiment
-                features, and scores funds Strong Buy → Strong Sell via a FastAPI + React dashboard.</p>
-              <a href="https://github.com/jehdadina-jpg/MFScope" target="_blank" class="proj-view">View →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">💳</div>
-              <div class="proj-name">SwipeRight</div>
-              <div class="proj-tags">
-                <span class="proj-tag cyan">Next.js</span>
-                <span class="proj-tag gold">ML</span>
-                <span class="proj-tag rose">FinTech</span>
+            <div class="bezel edu-card reveal" style="--d:1">
+              <div class="core edu-core">
+                <div class="edu-score"><span data-count="93.5" data-decimals="1">0.0</span><small>%</small></div>
+                <div class="edu-bar"><span style="--w:.935"></span></div>
+                <div class="edu-inst">CP Goenka International</div>
+                <div class="edu-deg">Science · CISCE</div>
               </div>
             </div>
-            <div class="proj-back">
-              <div class="proj-back-title">SwipeRight</div>
-              <p>AI credit-card recommendation engine — parses bank statements, ML-categorizes spend across 13
-                categories, and returns the one best card from 140+ Indian cards with an AI chat to explain why.</p>
-              <a href="https://github.com/jehdadina-jpg/swiperight" target="_blank" class="proj-view">View →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-flip">
-          <div class="proj-flip-inner">
-            <div class="proj-front">
-              <div class="proj-emoji">🌐</div>
-              <div class="proj-name">FinTrace</div>
-              <div class="proj-tags">
-                <span class="proj-tag">Node.js</span>
-                <span class="proj-tag cyan">Real-Time</span>
-                <span class="proj-tag rose">FinTech</span>
+            <div class="bezel edu-card reveal" style="--d:2">
+              <div class="core edu-core">
+                <div class="edu-score"><span data-count="78.83" data-decimals="2">0.00</span><small>%</small></div>
+                <div class="edu-bar"><span style="--w:.7883"></span></div>
+                <div class="edu-inst">Arya Gurukul Jr College</div>
+                <div class="edu-deg">Computer Science · HSC</div>
               </div>
             </div>
-            <div class="proj-back">
-              <div class="proj-back-title">FinTrace</div>
-              <p>Live network-latency globe for financial infrastructure — traceroutes to NSE, NYSE, Binance, and
-                AWS regions, streamed via SSE onto a 3D rotating globe with a Bloomberg-terminal readout.</p>
-              <a href="https://github.com/FTC-KJSSE/fintrace" target="_blank" class="proj-view">View →</a>
-            </div>
           </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ PAGE 5 — CONTACT (Feature 9: Shape Grid BG) ══ -->
-  <section class="section" id="page5">
-    <canvas id="shapegrid-canvas" class="shapegrid-canvas"></canvas>
-    <div class="contact-content">
-
-      <h2 class="contact-title">Let's build<br /><span>something great</span></h2>
-      <p class="contact-sub">Open to internships, collaborations, and interesting projects at the intersection of
-        fintech and AI.</p>
-      <div class="contact-links">
-        <div class="contact-row">
-          <a class="contact-link magnetic brand-github" href="https://github.com/jehdadina-jpg" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-            </svg>
-            GitHub
-          </a>
-          <a class="contact-link magnetic brand-codechef" href="https://www.codechef.com/users/jehdadina/" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon
-                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-            </svg>
-            CodeChef
-          </a>
-          <a class="contact-link magnetic brand-linkedin" href="https://www.linkedin.com/in/jehdadina/" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
-            LinkedIn
-          </a>
-          <a class="contact-link magnetic brand-instagram" href="https://www.instagram.com/jehdadina/" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-            Instagram
-          </a>
-          <a class="contact-link magnetic brand-email" href="mailto:jehdadina@gmail.com">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            jehdadina@gmail.com
-          </a>
         </div>
       </div>
-      <div class="contact-footer">
-        <span class="footer-item">🇮🇳 Mumbai, Maharashtra</span> <span class="footer-dot">·</span>
-        <span class="footer-item">📍 19.0595° N, 72.8290° E</span> <span class="footer-dot">·</span>
-        <span class="footer-item">🕒 <span id="mumbai-time">--:-- --</span></span>
+    </section>
+
+    <!-- ══ STACK — horizontal accordion ══ -->
+    <section class="section" id="page3">
+      <div class="container">
+        <header class="section-head section-head-row">
+          <h2 class="display split-words">The <em>toolkit.</em></h2>
+          <p class="section-lede reveal" style="--d:2">From pixel to model. What I reach for when an idea needs to become a
+            working system.</p>
+        </header>
+
+        <div class="accordion reveal">
+          <article class="bezel acc-panel is-open" tabindex="0">
+            <div class="core acc-core">
+              <div class="acc-rail"><span class="acc-count" id="count-frontend"></span><span class="acc-title">Frontend</span></div>
+              <div class="acc-body">
+                <div class="acc-head"><h3>Frontend</h3><span class="acc-count" data-count-mirror="frontend"></span></div>
+                <div class="tech-grid" id="tech-frontend"></div>
+              </div>
+            </div>
+          </article>
+          <article class="bezel acc-panel" tabindex="0">
+            <div class="core acc-core">
+              <div class="acc-rail"><span class="acc-count" id="count-backend"></span><span class="acc-title">Backend &amp; AI</span></div>
+              <div class="acc-body">
+                <div class="acc-head"><h3>Backend &amp; AI</h3><span class="acc-count" data-count-mirror="backend"></span></div>
+                <div class="tech-grid" id="tech-backend"></div>
+              </div>
+            </div>
+          </article>
+          <article class="bezel acc-panel" tabindex="0">
+            <div class="core acc-core">
+              <div class="acc-rail"><span class="acc-count" id="count-data"></span><span class="acc-title">Data &amp; Design</span></div>
+              <div class="acc-body">
+                <div class="acc-head"><h3>Data &amp; Design</h3><span class="acc-count" data-count-mirror="data"></span></div>
+                <div class="tech-grid" id="tech-data"></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ WORK — cream index with cursor-following previews ══ -->
+    <section class="section cream work" id="page4">
+      <div class="container">
+        <header class="section-head section-head-row">
+          <h2 class="display split-words">Things I've <em>shipped.</em></h2>
+          <p class="section-lede reveal" style="--d:2">Mostly money, mostly machine learning. Built end to end, usually at
+            2&nbsp;a.m.</p>
+        </header>
+
+        <ol class="work-list">
+          <li class="reveal">
+            <a class="work-row" data-i="0" href="https://github.com/jehdadina-jpg/anomaly" target="_blank" rel="noopener">
+              <span class="wr-idx">01.</span>
+              <span class="wr-name">Anomaly Terminal</span>
+              <span class="wr-cat">Market ML · Open Source</span>
+              <span class="wr-arrow"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              <span class="wr-desc">Bloomberg-inspired stock analysis platform that pairs technical analysis with ML to flag unusual market behaviour and issue Buy, Hold and Sell calls.</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a class="work-row" data-i="1" href="https://github.com/jehdadina-jpg/viewpoint" target="_blank" rel="noopener">
+              <span class="wr-idx">02.</span>
+              <span class="wr-name">Viewpoint</span>
+              <span class="wr-cat">Quant Finance · Python</span>
+              <span class="wr-arrow"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              <span class="wr-desc">Sentiment-driven Black-Litterman portfolio optimizer: a multi-model NLP ensemble feeds market views into a walk-forward backtest, in a Bloomberg-terminal-style dashboard.</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a class="work-row" data-i="2" href="https://github.com/jehdadina-jpg/alpha" target="_blank" rel="noopener">
+              <span class="wr-idx">03.</span>
+              <span class="wr-name">Alpha</span>
+              <span class="wr-cat">Quant Dashboard · FastAPI</span>
+              <span class="wr-arrow"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              <span class="wr-desc">Terminal-style dashboard for NSE stocks: a cointegrated pairs scanner, realized-vol term structure, and a factor exposure grid.</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a class="work-row" data-i="3" href="https://github.com/jehdadina-jpg/MFScope" target="_blank" rel="noopener">
+              <span class="wr-idx">04.</span>
+              <span class="wr-name">MFScope</span>
+              <span class="wr-cat">Fund Intelligence · Python</span>
+              <span class="wr-arrow"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              <span class="wr-desc">India mutual-fund engine: daily AMFI NAV data, 30+ risk and sentiment features, scored Strong Buy → Strong Sell via FastAPI + React.</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a class="work-row" data-i="4" href="https://github.com/jehdadina-jpg/swiperight" target="_blank" rel="noopener">
+              <span class="wr-idx">05.</span>
+              <span class="wr-name">SwipeRight</span>
+              <span class="wr-cat">Credit ML · Next.js</span>
+              <span class="wr-arrow"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              <span class="wr-desc">Parses bank statements, ML-categorises spend across 13 categories, and picks the one best card from 140+ Indian cards.</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a class="work-row" data-i="5" href="https://github.com/jehdadina-jpg/GitControl" target="_blank" rel="noopener">
+              <span class="wr-idx">06.</span>
+              <span class="wr-name">GitControl</span>
+              <span class="wr-cat">Developer Tools · Electron</span>
+              <span class="wr-arrow"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              <span class="wr-desc">A premium Windows desktop app for driving Git and GitHub visually, so everyday workflows need zero manual shell commands.</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a class="work-row" data-i="6" href="https://github.com/FTC-KJSSE/fintrace" target="_blank" rel="noopener">
+              <span class="wr-idx">07.</span>
+              <span class="wr-name">FinTrace</span>
+              <span class="wr-cat">Latency Telemetry · Node.js</span>
+              <span class="wr-arrow"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              <span class="wr-desc">Live network-latency globe for NSE, NYSE, Binance and AWS regions, streamed over SSE with a terminal readout.</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a class="work-row" data-i="7" href="https://github.com/FTC-KJSSE/payrozgar" target="_blank" rel="noopener">
+              <span class="wr-idx">08.</span>
+              <span class="wr-name">PayRozgar</span>
+              <span class="wr-cat">Offline PWA · Vanilla JS</span>
+              <span class="wr-arrow"><i class="ph-light ph-arrow-up-right" aria-hidden="true"></i></span>
+              <span class="wr-desc">Offline-first payroll and attendance for small shops, with service-worker caching and auto-generated payslips.</span>
+            </a>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ══ CONTACT — keycap console ══ -->
+    <section class="section contact" id="page5">
+      <div class="contact-glow" aria-hidden="true"></div>
+      <div class="container contact-inner">
+        <h2 class="contact-title split-words">Let's build<br /><em>something great.</em></h2>
+        <p class="section-lede contact-sub reveal" style="--d:2">Open to internships, collaborations, and interesting projects at
+          the intersection of fintech and AI. Press a key.</p>
+
+        <div class="console reveal" style="--d:3">
+          <span class="screw s1"></span><span class="screw s2"></span><span class="screw s3"></span><span class="screw s4"></span>
+
+          <div class="lcd">
+            <span class="live-dot"></span>
+            <span>IST <b id="mumbai-time">--:--:--</b></span>
+            <span class="lcd-sep"></span>
+            <span class="lcd-hide-sm">Mumbai 19.06°N 72.83°E</span>
+            <span class="lcd-sep lcd-hide-sm"></span>
+            <span id="lcd-msg">Status · open to internships</span>
+          </div>
+
+          <div class="deck">
+            <div class="keys">
+              <a class="key key-2 k-mint" href="mailto:jehdadina@gmail.com" data-f="2.2" data-msg="> mailto jehdadina@gmail.com"><small>01</small><span class="key-face"><i class="ph-fill ph-envelope-simple" aria-hidden="true"></i><span class="key-label">Email</span></span></a>
+              <button class="key k-cream" type="button" id="copy-email-btn" data-f="4" data-msg="> copy address to clipboard"><small>02</small><span class="key-face"><i class="ph-fill ph-copy" aria-hidden="true"></i><span class="key-label">Copy</span></span></button>
+              <a class="key k-dark" href="https://github.com/jehdadina-jpg" target="_blank" rel="noopener" data-f="5.5" data-msg="> github.com/jehdadina-jpg"><small>03</small><span class="key-face"><i class="ph-fill ph-github-logo" aria-hidden="true"></i><span class="key-label">GitHub</span></span></a>
+              <a class="key k-blue" href="https://www.linkedin.com/in/jehdadina/" target="_blank" rel="noopener" data-f="3" data-msg="> linkedin.com/in/jehdadina"><small>04</small><span class="key-face"><i class="ph-fill ph-linkedin-logo" aria-hidden="true"></i><span class="key-label">LinkedIn</span></span></a>
+              <a class="key k-rose" href="https://www.instagram.com/jehdadina/" target="_blank" rel="noopener" data-f="7" data-msg="> instagram.com/jehdadina"><small>05</small><span class="key-face"><i class="ph-fill ph-instagram-logo" aria-hidden="true"></i><span class="key-label">Instagram</span></span></a>
+              <a class="key k-amber" href="https://www.codechef.com/users/jehdadina/" target="_blank" rel="noopener" data-f="6" data-msg="> codechef.com/users/jehdadina"><small>06</small><span class="key-face"><i class="ph-fill ph-star" aria-hidden="true"></i><span class="key-label">CodeChef</span></span></a>
+              <button class="key k-dark" type="button" onclick="goTo(0)" data-f="1.2" data-msg="> scroll to top"><small>07</small><span class="key-face"><i class="ph-fill ph-arrow-up" aria-hidden="true"></i><span class="key-label">Top</span></span></button>
+              <button class="key key-2 k-violet" type="button" onclick="openCmdk()" data-f="3.6" data-msg="> open command palette"><small>08</small><span class="key-face"><i class="ph-fill ph-command" aria-hidden="true"></i><span class="key-label">Menu</span></span></button>
+              <a class="key key-2 k-cream" href="mailto:jehdadina@gmail.com?subject=Resume%20Request&amp;body=Hi%20Jeh%2C%0A%0ACould%20you%20send%20over%20your%20resume%3F%0A%0AThanks!" data-f="2.8" data-msg="> request resume via email"><small>09</small><span class="key-face"><i class="ph-fill ph-file-text" aria-hidden="true"></i><span class="key-label">Resume</span></span></a>
+            </div>
+            <div class="grille" aria-hidden="true"></div>
+            <div class="scope" aria-hidden="true">
+              <canvas id="scope-canvas"></canvas>
+              <span class="scope-label" id="scope-label">SIG · IDLE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-skyline" aria-hidden="true"></div>
+
+      <div class="wordmark" aria-hidden="true">
+        <div class="wordmark-inner">Jeh <em>Dadina</em></div>
+        <div class="wordmark-foot"><span><span class="live-dot"></span>© 2026 Jeh Dadina</span><span>Built by hand in Mumbai</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Work preview — follows the cursor over the project index -->
+  <div class="work-preview" aria-hidden="true">
+    <div class="wp-frame">
+      <div class="wp-track">
+        <!-- Real GitHub social-preview cards for each repo, in the same order as .work-list -->
+        <div class="wp"><img src="https://opengraph.githubassets.com/1/jehdadina-jpg/anomaly" alt="" loading="lazy" /></div>
+        <div class="wp"><img src="https://opengraph.githubassets.com/1/jehdadina-jpg/viewpoint" alt="" loading="lazy" /></div>
+        <div class="wp"><img src="https://opengraph.githubassets.com/1/jehdadina-jpg/alpha" alt="" loading="lazy" /></div>
+        <div class="wp"><img src="https://opengraph.githubassets.com/1/jehdadina-jpg/MFScope" alt="" loading="lazy" /></div>
+        <div class="wp"><img src="https://opengraph.githubassets.com/1/jehdadina-jpg/swiperight" alt="" loading="lazy" /></div>
+        <div class="wp"><img src="https://opengraph.githubassets.com/1/jehdadina-jpg/GitControl" alt="" loading="lazy" /></div>
+        <div class="wp"><img src="https://opengraph.githubassets.com/1/FTC-KJSSE/fintrace" alt="" loading="lazy" /></div>
+        <div class="wp"><img src="https://opengraph.githubassets.com/1/FTC-KJSSE/payrozgar" alt="" loading="lazy" /></div>
       </div>
     </div>
-    <div class="mumbai-skyline" aria-hidden="true">
-      <img src="images/mumbai.png" alt="" />
-    </div>
-  </section>
+  </div>
 
-  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="script.js?v=20260930g"></script>
 </body>
 
 </html>
