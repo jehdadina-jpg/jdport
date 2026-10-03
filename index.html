@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
 
-  <link rel="stylesheet" href="styles.css?v=20260930g" />
+  <link rel="stylesheet" href="styles.css?v=20261003y" />
 
   <meta name="theme-color" content="#050505" />
   <link rel="icon"
@@ -195,11 +195,11 @@
   <!-- MOBILE OVERLAY MENU -->
   <div class="mobile-menu-overlay" id="mobile-menu-overlay">
     <div class="mobile-menu-links">
-      <a style="--i:0" onclick="closeMobileMenu(); goTo(0)">Home</a>
-      <a style="--i:1" onclick="closeMobileMenu(); goTo(1)">Experience</a>
-      <a style="--i:2" onclick="closeMobileMenu(); goTo(2)">Stack</a>
-      <a style="--i:3" onclick="closeMobileMenu(); goTo(3)">Work</a>
-      <a style="--i:4" onclick="closeMobileMenu(); goTo(4)">Contact</a>
+      <a style="--i:0" href="#home" onclick="event.preventDefault(); closeMobileMenu(); goTo(0)">Home</a>
+      <a style="--i:1" href="#experience" onclick="event.preventDefault(); closeMobileMenu(); goTo(1)">Experience</a>
+      <a style="--i:2" href="#skills" onclick="event.preventDefault(); closeMobileMenu(); goTo(2)">Stack</a>
+      <a style="--i:3" href="#projects" onclick="event.preventDefault(); closeMobileMenu(); goTo(3)">Work</a>
+      <a style="--i:4" href="#contact" onclick="event.preventDefault(); closeMobileMenu(); goTo(4)">Contact</a>
     </div>
     <div class="mobile-menu-foot" style="--i:5">
       <a href="mailto:jehdadina@gmail.com">jehdadina@gmail.com</a>
@@ -237,11 +237,14 @@
 
   <main>
 
-    <!-- ══ HERO — pinned intro: the camera flies into the CRT ══ -->
+    <!-- ══ HERO — pinned intro: the camera rides the Central line into the laptop ══ -->
     <section class="section hero" id="page1">
       <div class="hero-stage">
         <div class="hero-glow" aria-hidden="true"></div>
         <div class="hero-glow-2" aria-hidden="true"></div>
+        <canvas class="train-canvas" id="train-canvas" aria-hidden="true"></canvas>
+        <div class="hero-scrim" aria-hidden="true"></div>
+        <div class="hero-caption" aria-hidden="true"><span class="live-dot"></span><span>Central line · Fast</span><span class="hc-sep"></span><span>CSMT → Thane</span><span class="hc-sep"></span><span id="hc-time">--:-- IST</span></div>
 
         <ul class="hero-roles" aria-label="Roles">
           <li>FinTech builder</li>
@@ -253,13 +256,14 @@
         <div class="container hero-grid">
           <div class="hero-copy">
             <h1 class="hero-name">
-              <span class="sr-only">Jeh Dadina, computer engineer and builder. </span>
-              <span class="mask-line" aria-hidden="true"><span class="chars" data-text="I build machines"></span></span>
-              <span class="mask-line" aria-hidden="true"><span class="chars" data-text="that"></span><em class="chars" data-text="think."></em></span>
+              <span class="sr-only">Jeh Dadina</span>
+              <span class="mask-line" aria-hidden="true"><span class="chars" data-text="JEH"></span></span>
+              <span class="mask-line" aria-hidden="true"><em class="chars" data-text="DADINA"></em></span>
             </h1>
+            <p class="hero-tag reveal" style="--d:1">I build software where finance, data &amp; AI meet.</p>
 
             <p class="hero-lede reveal" style="--d:2">
-              Computer engineer who ships first and explains later. Full-stack, ML, systems, whatever the problem needs. Based in Mumbai.
+              Full-stack, ML, systems, whatever the problem needs. I build financial software, ML systems, and data-heavy products where engineering meets real-world problems. Based in Mumbai.
             </p>
 
             <div class="hero-ctas reveal" style="--d:3">
@@ -274,30 +278,7 @@
             </div>
           </div>
 
-          <div class="crt-zoom">
-        <div class="crt-stage reveal" style="--d:2">
-          <div class="crt">
-            <div class="crt-screen" id="crt-screen" role="button" tabindex="0" aria-label="Television showing an ASCII portrait of Jeh. Press to change channel.">
-              <canvas id="crt-canvas"></canvas>
-              <span class="crt-rgb-fx" aria-hidden="true"></span>
-              <div class="crt-osd">
-                <span><b id="crt-ch">CH 01</b> <span id="crt-label">JEH.DADINA</span></span>
-                <span id="greeting-tag">Hello</span>
-              </div>
-              <div class="crt-osd crt-osd-bottom"><span class="hero-type-prompt">~/jeh $</span> <span id="typewriter-el"></span></div>
-            </div>
-            <div class="crt-panel">
-              <span class="crt-brand">JD·TERM</span>
-              <button class="crt-knob hint" id="crt-knob" type="button" aria-label="Next channel" title="Change channel"><i></i></button>
-              <span class="crt-knob crt-knob-sm" aria-hidden="true"><i></i></span>
-              <span class="crt-pips" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
-              <span class="crt-grille" aria-hidden="true"></span>
-              <span class="crt-led" aria-hidden="true"></span>
-            </div>
-          </div>
-          <div class="desk" aria-hidden="true"></div>
-        </div>
-          </div>
+          <div class="hero-slot" aria-hidden="true"></div>
         </div>
 
         <div class="zoom-black" aria-hidden="true"></div>
@@ -315,7 +296,7 @@
         </h2>
 
         <div class="stmt-foot">
-          <p class="stmt-note">That was Saki, my Kawasaki Ninja 300.<br />Tap the word to send her through again.</p>
+          <p class="stmt-note">That was Saki, my Kawasaki Ninja 300.<br /><button type="button" class="stmt-replay">Tap here or “Finance,” to send her through again <i class="ph-light ph-arrow-counter-clockwise" aria-hidden="true"></i></button></p>
           <p class="scrub-text">
             I train models on market data: terminals that flag anomalies before the tape does, fund engines that
             score NAV history like sentiment, and credit ML that reads a bank statement better than a banker.
@@ -480,6 +461,34 @@
           <p class="section-lede reveal" style="--d:2">Mostly money, mostly machine learning. Built end to end, usually at
             2&nbsp;a.m.</p>
         </header>
+      </div>
+
+      <div class="container work-split">
+      <!-- Project ring — drag to spin, click the front card to open the repo -->
+      <div class="ring reveal" style="--d:2" aria-roledescription="carousel" aria-label="Projects">
+        <div class="ring-caption" aria-live="polite">
+          <span class="rc-count"><b id="ring-idx">01</b> / 08</span>
+          <span class="rc-name" id="ring-name">Anomaly Terminal</span>
+          <span class="rc-cat" id="ring-cat">Market ML · Open Source</span>
+        </div>
+        <div class="ring-stage" tabindex="0" aria-label="Project carousel. Use the arrow keys to rotate.">
+          <div class="ring-scene">
+            <a class="ring-card" data-art="anomaly" data-cat="Market ML · Open Source" href="https://github.com/jehdadina-jpg/anomaly" target="_blank" rel="noopener" draggable="false"><canvas></canvas><span class="ring-tag">01 · Anomaly Terminal</span></a>
+            <a class="ring-card" data-art="viewpoint" data-cat="Quant Finance · Python" href="https://github.com/jehdadina-jpg/viewpoint" target="_blank" rel="noopener" draggable="false"><canvas></canvas><span class="ring-tag">02 · Viewpoint</span></a>
+            <a class="ring-card" data-art="alpha" data-cat="Quant Dashboard · FastAPI" href="https://github.com/jehdadina-jpg/alpha" target="_blank" rel="noopener" draggable="false"><canvas></canvas><span class="ring-tag">03 · Alpha</span></a>
+            <a class="ring-card" data-art="mfscope" data-cat="Fund Intelligence · Python" href="https://github.com/jehdadina-jpg/MFScope" target="_blank" rel="noopener" draggable="false"><canvas></canvas><span class="ring-tag">04 · MFScope</span></a>
+            <a class="ring-card" data-art="swiperight" data-cat="Credit ML · Next.js" href="https://github.com/jehdadina-jpg/swiperight" target="_blank" rel="noopener" draggable="false"><canvas></canvas><span class="ring-tag">05 · SwipeRight</span></a>
+            <a class="ring-card" data-art="gitcontrol" data-cat="Developer Tools · Electron" href="https://github.com/jehdadina-jpg/GitControl" target="_blank" rel="noopener" draggable="false"><canvas></canvas><span class="ring-tag">06 · GitControl</span></a>
+            <a class="ring-card" data-art="fintrace" data-cat="Latency Telemetry · Node.js" href="https://github.com/FTC-KJSSE/fintrace" target="_blank" rel="noopener" draggable="false"><canvas></canvas><span class="ring-tag">07 · FinTrace</span></a>
+            <a class="ring-card" data-art="payrozgar" data-cat="Offline PWA · Vanilla JS" href="https://github.com/FTC-KJSSE/payrozgar" target="_blank" rel="noopener" draggable="false"><canvas></canvas><span class="ring-tag">08 · PayRozgar</span></a>
+          </div>
+        </div>
+        <div class="ring-ctrl">
+          <button class="ring-btn" type="button" data-dir="-1" aria-label="Previous project"><i class="ph-light ph-arrow-left" aria-hidden="true"></i></button>
+          <span class="ring-hint"><i class="ph-light ph-hand-grabbing" aria-hidden="true"></i> Drag to spin</span>
+          <button class="ring-btn" type="button" data-dir="1" aria-label="Next project"><i class="ph-light ph-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
 
         <ol class="work-list">
           <li class="reveal">
@@ -603,7 +612,7 @@
 
       <div class="wordmark" aria-hidden="true">
         <div class="wordmark-inner">Jeh <em>Dadina</em></div>
-        <div class="wordmark-foot"><span><span class="live-dot"></span>© 2026 Jeh Dadina</span><span>Built by hand in Mumbai</span></div>
+        <div class="wordmark-foot"><span><span class="live-dot"></span>© 2026 Jeh Dadina</span></div>
       </div>
     </section>
 
@@ -629,7 +638,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script src="script.js?v=20260930g"></script>
+  <script src="script.js?v=20261003y"></script>
 </body>
 
 </html>
